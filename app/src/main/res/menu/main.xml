@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/nav_store"
+        android:title="@string/app_name"
+        android:icon="@drawable/ic_home"
+        app:contentDescription="@string/app_name" />
+
+    <item
+        android:id="@+id/nav_my_sims"
+        android:title="@string/search_hint"
+        android:icon="@drawable/ic_search"
+        app:contentDescription="@string/search_hint" />
+
+    <item
+        android:id="@+id/nav_profile"
+        android:title="@string/about"
+        android:icon="@drawable/ic_about"
+        app:contentDescription="@string/about" />
+</menu>

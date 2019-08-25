@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">TDK Sözlük</string>
+    <string name="search_hint">Kelime ara</string>
+    <string name="word_of_day">Günün kelimesi</string>
+    <string name="word_origin">Köken:</string>
+    <string name="word_equivalent">Karşılık:</string>
+    <string name="word_mean">Anlamı:</string>
+    <string name="frequent_mistakes">Sıkça Yapılan Yanlışlar</string>
+    <string name="frequent_mixed">Sıkça Karıştırılan Sözcükler</string>
+    <string name="one_word">Bir Kelime</string>
+    <string name="one_proverb">Bir Atasözü</string>
+    <string name="about">Hakkımızda</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

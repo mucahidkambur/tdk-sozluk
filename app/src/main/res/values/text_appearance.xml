@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TextAppearance.BottomNavigationView" parent="@style/TextAppearance.MaterialComponents.Caption">
+        <item name="android:textSize">@dimen/text_size_caption</item>
+    </style>
+</resources>
