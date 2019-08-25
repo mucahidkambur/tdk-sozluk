@@ -64,6 +64,11 @@ class MainFragment : Fragment(), Injectable {
 
     private fun initView(){
 
+        //SwipeLayout
+        swipe_main.setProgressViewOffset(false, resources.getDimensionPixelSize(R.dimen.refresher_offset),
+            resources.getDimensionPixelSize(R.dimen.refresher_offset_end))
+        swipe_main.setOnRefreshListener { viewModel.content(); }
+
         layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
         val dimensionPadding = resources.getDimensionPixelSize(R.dimen.margin_large)
@@ -81,6 +86,7 @@ class MainFragment : Fragment(), Injectable {
                     dataBinding.content = it
                     pager_mixed.adapter = PageAdapter(it.karistirma)
                     pager_mistakes.adapter = PageAdapter(it.syyd)
+                    swipe_main.isRefreshing = false
                 }
 
             }else if (it.status == Status.ERROR){

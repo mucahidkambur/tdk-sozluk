@@ -9,118 +9,161 @@
             type="com.mucahitkambur.tdksozluk.model.ContentResult" />
     </data>
 
-    <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:context=".ui.main.MainFragment"
-            android:fitsSystemWindows="true"
-            android:fillViewport="true">
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/blue">
-
-            <LinearLayout
-                android:id="@+id/linear_main"
+        <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:orientation="vertical"
-                android:layout_marginTop="@dimen/margin_normal"
-                android:paddingStart="@dimen/margin_large"
-                android:paddingEnd="@dimen/margin_normal"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent">
+                android:layout_height="match_parent"
+                tools:context=".ui.main.MainFragment"
+                android:fitsSystemWindows="true"
+                android:fillViewport="true">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@android:color/white"
-                    android:tag="parallax=0.5"
-                    android:text="@string/word_of_day" />
-
-                <TextView
-                    android:id="@+id/text_world_of_day"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_normal"
-                    android:layout_marginBottom="@dimen/spacing_normal"
-                    android:textColor="@android:color/white"
-                    android:textSize="36sp"
-                    android:tag="parallax=0.9"
-                    android:text="@{content.yabanci.kkelime}" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/blue">
 
                 <LinearLayout
-                    android:orientation="horizontal"
+                    android:id="@+id/linear_main"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="0dp"
+                    android:orientation="vertical"
+                    android:layout_marginTop="@dimen/margin_normal"
+                    android:paddingStart="@dimen/margin_large"
+                    android:paddingEnd="@dimen/margin_normal"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/word_origin"
-                        android:textColor="@android:color/white" />
+                        android:textColor="@android:color/white"
+                        android:tag="parallax=0.5"
+                        android:text="@string/word_of_day" />
 
                     <TextView
-                        android:id="@+id/text_origin"
+                        android:id="@+id/text_world_of_day"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:text="@{content.yabanci.kkoken}"
-                        android:textColor="@android:color/white" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/word_equivalent"
-                        android:textColor="@android:color/white" />
-
-                    <TextView
-                        android:id="@+id/text_equivalent"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        htmlToText="@{content.yabanci.kkarsilik}"
-                        android:textColor="@android:color/white" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/word_mean"
-                        android:textColor="@android:color/white" />
-
-                    <TextView
-                        android:id="@+id/text_mean"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_marginEnd="5dp"
+                        android:layout_marginTop="@dimen/spacing_normal"
                         android:layout_marginBottom="@dimen/spacing_normal"
-                        htmlToText="@{content.yabanci.anlam}"
-                        android:textColor="@android:color/white" />
-                </LinearLayout>
+                        android:textColor="@android:color/white"
+                        android:textSize="36sp"
+                        android:tag="parallax=0.9"
+                        android:text="@{content.yabanci.kkelime}" />
 
-            </LinearLayout>
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/text_origin_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/word_origin"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:textColor="@android:color/white" />
+
+                        <TextView
+                            android:id="@+id/text_colon_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/colon"
+                            app:layout_constraintStart_toStartOf="@+id/text_colon_2"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:textColor="@android:color/white" />
+
+                        <TextView
+                            android:id="@+id/text_origin"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:text="@{content.yabanci.kkoken}"
+                            app:layout_constraintStart_toEndOf="@+id/text_colon_1"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:textColor="@android:color/white" />
+
+                        <TextView
+                            android:id="@+id/text_equivalent_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/word_equivalent"
+                            app:layout_constraintTop_toBottomOf="@+id/text_origin_title"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:textColor="@android:color/white" />
+
+                        <TextView
+                            android:id="@+id/text_colon_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/colon"
+                            android:layout_marginStart="@dimen/spacing_micro"
+                            app:layout_constraintTop_toTopOf="@+id/text_equivalent_title"
+                            app:layout_constraintStart_toEndOf="@+id/text_equivalent_title"
+                            app:layout_constraintBottom_toBottomOf="@+id/text_equivalent_title"
+                            android:textColor="@android:color/white" />
+
+                        <TextView
+                            android:id="@+id/text_equivalent"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            htmlToText="@{content.yabanci.kkarsilik}"
+                            app:layout_constraintTop_toTopOf="@+id/text_equivalent_title"
+                            app:layout_constraintStart_toEndOf="@+id/text_colon_1"
+                            app:layout_constraintBottom_toBottomOf="@+id/text_equivalent_title"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:textColor="@android:color/white" />
+
+                        <TextView
+                            android:id="@+id/text_mean_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/word_mean"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/text_equivalent_title"
+                            android:textColor="@android:color/white" />
+
+                        <TextView
+                            android:id="@+id/text_colon_3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/colon"
+                            app:layout_constraintStart_toStartOf="@+id/text_colon_2"
+                            app:layout_constraintTop_toTopOf="@+id/text_mean_title"
+                            app:layout_constraintBottom_toBottomOf="@+id/text_mean_title"
+                            android:textColor="@android:color/white" />
+
+                        <TextView
+                            android:id="@+id/text_mean"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_marginBottom="@dimen/spacing_normal"
+                            htmlToText="@{content.yabanci.anlam}"
+                            app:layout_constraintTop_toTopOf="@+id/text_mean_title"
+                            app:layout_constraintStart_toEndOf="@+id/text_colon_3"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:textColor="@android:color/white" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/card_view"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
+                    android:layout_marginTop="@dimen/margin_medium"
                     app:layout_constraintTop_toBottomOf="@+id/linear_main"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -147,7 +190,6 @@
                             android:id="@+id/pager_mistakes"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/margin_normal"
                             android:clipToPadding="false"
                             android:clipChildren="false"/>
 
@@ -165,7 +207,6 @@
                             android:id="@+id/pager_mixed"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/margin_normal"
                             android:clipToPadding="false"
                             android:clipChildren="false"/>
 
@@ -197,8 +238,9 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="8dp"
-                                    android:includeFontPadding="false"
                                     android:text="@{content.kelime.get(0).madde}"
+                                    android:textColor="@color/blue"
+                                    android:textStyle="bold"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintBottom_toTopOf="@+id/text_one_word_desc"
                                     app:layout_constraintTop_toTopOf="parent"
@@ -249,7 +291,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="@dimen/spacing_normal"
                                     android:text="@{content.atasoz.get(0).madde}"
-                                    android:includeFontPadding="false"
+                                    android:textColor="@color/blue"
+                                    android:textStyle="bold"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintBottom_toTopOf="@+id/text_one_proverb_desc"
                                     app:layout_constraintTop_toTopOf="parent"
@@ -273,6 +316,8 @@
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 </layout>
