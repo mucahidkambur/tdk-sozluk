@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mucahitkambur.tdksozluk.R
@@ -14,10 +15,7 @@ import com.mucahitkambur.tdksozluk.adapter.PageAdapter
 import com.mucahitkambur.tdksozluk.databinding.FragmentMainBinding
 import com.mucahitkambur.tdksozluk.di.Injectable
 import com.mucahitkambur.tdksozluk.network.local.AppDatabase
-import com.mucahitkambur.tdksozluk.util.AppExecutors
-import com.mucahitkambur.tdksozluk.util.EventObserver
-import com.mucahitkambur.tdksozluk.util.Status
-import com.mucahitkambur.tdksozluk.util.viewModelProvider
+import com.mucahitkambur.tdksozluk.util.*
 import kotlinx.android.synthetic.main.fragment_main.*
 import javax.inject.Inject
 
@@ -50,6 +48,7 @@ class MainFragment : Fragment(), Injectable {
             false
         ).apply {
             lifecycleOwner = this@MainFragment
+            mainViewModel = viewModel
         }
         return dataBinding.root
     }
@@ -59,10 +58,15 @@ class MainFragment : Fragment(), Injectable {
 
         initView()
         viewModel.content()
-        observeIcerik()
+        observeContent()
+        observeWebView()
     }
 
     private fun initView(){
+
+        card_rule.setOnClickListener{
+
+        }
 
         //SwipeLayout
         swipe_main.setProgressViewOffset(false, resources.getDimensionPixelSize(R.dimen.refresher_offset),
@@ -79,7 +83,7 @@ class MainFragment : Fragment(), Injectable {
         pager_mistakes.pageMargin = dimensionMargin
     }
 
-    private fun observeIcerik(){
+    private fun observeContent(){
         viewModel.contenResult.observe(this, EventObserver {
             if (it.status == Status.SUCCESS){
                 it.data?.let {
@@ -91,6 +95,14 @@ class MainFragment : Fragment(), Injectable {
 
             }else if (it.status == Status.ERROR){
 
+            }
+        })
+    }
+
+    private fun observeWebView(){
+        viewModel.webviewResult().observe(this, Observer {
+            when (it.first) {
+                START_RULE_WEBVIEW -> startWebView(it.second)
             }
         })
     }

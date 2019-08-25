@@ -7,6 +7,10 @@
         <variable
             name="content"
             type="com.mucahitkambur.tdksozluk.model.ContentResult" />
+
+        <variable
+            name="mainViewModel"
+            type="com.mucahitkambur.tdksozluk.ui.main.MainViewModel" />
     </data>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -309,6 +313,49 @@
                                     android:layout_marginTop="@dimen/spacing_normal"
                                     android:text="@{content.atasoz.get(0).anlam}"
                                     tools:text="bungalov"/>
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <TextView
+                            android:id="@+id/text_one_rule"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/one_rule"
+                            android:textColor="@color/blue"
+                            android:textSize="20sp"
+                            android:layout_marginTop="@dimen/margin_normal"
+                            android:layout_marginStart="@dimen/margin_normal"/>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/card_rule"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/margin_medium"
+                            android:layout_marginBottom="@dimen/margin_medium"
+                            android:foreground="?selectableItemBackground"
+                            android:onClick="@{() -> mainViewModel.startWebWiew(content.kural.get(0).url)}"
+                            app:cardElevation="5dp"
+                            app:cardCornerRadius="10dp">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/margin_normal">
+
+                                <TextView
+                                    android:id="@+id/text_rule"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/spacing_normal"
+                                    android:text="@{content.kural.get(0).adi}"
+                                    android:textColor="@color/blue"
+                                    android:textStyle="bold"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    tools:text="bungalov" />
 
                             </androidx.constraintlayout.widget.ConstraintLayout>
 

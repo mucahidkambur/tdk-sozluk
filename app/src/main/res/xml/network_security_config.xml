@@ -2,5 +2,6 @@
 <network-security-config>
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="true">sozluk.gov.tr</domain>
+        <domain includeSubdomains="true">tdk.gov.tr</domain>
     </domain-config>
 </network-security-config>
