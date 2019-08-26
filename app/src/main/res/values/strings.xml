@@ -13,4 +13,9 @@
     <string name="about">Hakkımızda</string>
 
     <string name="colon">:</string>
+    <string name="version">Versiyon: %s</string>
+    <string name="about_app">%1s, Türk Dil Kurumunun verilerini kullanan açık kaynak bir sözlük
+        uygulamasıdır. Projeye katkıda bulunmak veya kaynak kodlarını incelemek için %2s adresine
+        gidebilirsiniz. \n\n Uygulama için geri bildirim göndermek
+        isterseniz de %3s adresine mail atabilirsiniz.</string>
 </resources>

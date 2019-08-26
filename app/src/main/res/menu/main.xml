@@ -3,19 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/nav_store"
+        android:id="@+id/nav_home"
         android:title="@string/app_name"
         android:icon="@drawable/ic_home"
         app:contentDescription="@string/app_name" />
 
     <item
-        android:id="@+id/nav_my_sims"
+        android:id="@+id/nav_search"
         android:title="@string/search_hint"
         android:icon="@drawable/ic_search"
         app:contentDescription="@string/search_hint" />
 
     <item
-        android:id="@+id/nav_profile"
+        android:id="@+id/nav_about"
         android:title="@string/about"
         android:icon="@drawable/ic_about"
         app:contentDescription="@string/about" />
