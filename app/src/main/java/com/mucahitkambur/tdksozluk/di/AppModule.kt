@@ -9,8 +9,10 @@ import com.mucahitkambur.tdksozluk.network.api.ApiService
 import com.mucahitkambur.tdksozluk.network.local.AppDatabase
 import com.mucahitkambur.tdksozluk.network.local.SuggestionDao
 import com.mucahitkambur.tdksozluk.util.LiveDataCallAdapterFactory
+import com.mucahitkambur.tdksozluk.util.hasNetwork
 import dagger.Module
 import dagger.Provides
+import okhttp3.Cache
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -22,6 +24,12 @@ import javax.inject.Singleton
 @Module(includes = [ViewModelModule::class])
 class AppModule {
 
+
+    @Singleton
+    @Provides
+    fun provideContext(application: Application): Context {
+        return application.applicationContext
+    }
 
     @Singleton
     @Provides
@@ -45,9 +53,13 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideInterceptor(): Interceptor {
+    fun provideInterceptor(context: Context): Interceptor {
         return Interceptor { chain ->
-            val request = chain.request()
+            var request = chain.request()
+            request = if (hasNetwork(context)!!)
+                request.newBuilder().header("Cache-Control", "public, max-age=" + 1).build()
+            else
+                request.newBuilder().header("Cache-Control", "public, only-if-cached, max-stale=" + 60 * 60 * 24 * 7).build()
                 .newBuilder()
                 .build()
             chain.proceed(request)
@@ -56,7 +68,11 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideHttpClient(interceptor: Interceptor): OkHttpClient {
+    fun provideHttpClient(interceptor: Interceptor, application: Application): OkHttpClient {
+
+        val cacheSize = (5 * 1024 * 1024).toLong()
+        val myCache = Cache(application.applicationContext.cacheDir, cacheSize)
+
         val loggingInterceptor = HttpLoggingInterceptor()
         loggingInterceptor.level = if (BuildConfig.DEBUG)
             HttpLoggingInterceptor.Level.BODY
@@ -64,6 +80,7 @@ class AppModule {
             HttpLoggingInterceptor.Level.NONE
 
         return OkHttpClient.Builder()
+            .cache(myCache)
             .connectTimeout(2, TimeUnit.MINUTES)
             .readTimeout(2, TimeUnit.MINUTES)
             .addInterceptor(interceptor)
