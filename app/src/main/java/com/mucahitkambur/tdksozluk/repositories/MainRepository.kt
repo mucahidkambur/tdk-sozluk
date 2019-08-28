@@ -8,17 +8,20 @@ import com.mucahitkambur.tdksozluk.network.api.ApiErrorResponse
 import com.mucahitkambur.tdksozluk.network.api.ApiResponse
 import com.mucahitkambur.tdksozluk.network.api.ApiService
 import com.mucahitkambur.tdksozluk.network.api.ApiSuccessResponse
+import com.mucahitkambur.tdksozluk.network.local.AppDatabase
 import com.mucahitkambur.tdksozluk.util.AppExecutors
 import com.mucahitkambur.tdksozluk.util.Event
 import com.mucahitkambur.tdksozluk.util.Resource
 import javax.inject.Inject
 
 class MainRepository @Inject constructor(
+    private val database: AppDatabase,
     private val appExecutors: AppExecutors,
     private val apiService: ApiService
 ){
     private val icerikResult = MediatorLiveData<Event<Resource<ContentResult>>>()
     private val autocompResult = MediatorLiveData<Event<Resource<List<Autocomplete>>>>()
+    private val autocompleteDbResult = MediatorLiveData<List<Autocomplete>>()
 
 
     fun icerik(): LiveData<Event<Resource<ContentResult>>> {
@@ -42,6 +45,7 @@ class MainRepository @Inject constructor(
             when(val apiResponse = ApiResponse.create(response)){
                 is ApiSuccessResponse -> {
                     autocompResult.postValue(Event(Resource.success(apiResponse.body)))
+                    insertAutocompToDb()
                 }
                 is ApiErrorResponse -> {
                     autocompResult.postValue(Event(Resource.error(apiResponse.errorMessage, null)))
@@ -49,5 +53,15 @@ class MainRepository @Inject constructor(
             }
         }
         return autocompResult
+    }
+
+    fun insertAutocompToDb(){
+        appExecutors.diskIO().execute{
+            database.autocompDao().insert(autocompResult.value?.peekContent()?.data)
+        }
+    }
+
+    fun getAutocompFromDb(): LiveData<List<Autocomplete>>{
+        return database.autocompDao().getAutocomp()
     }
 }

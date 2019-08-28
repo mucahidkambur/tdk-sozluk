@@ -18,4 +18,7 @@
         uygulamasıdır. Projeye katkıda bulunmak veya kaynak kodlarını incelemek için %2s adresine
         gidebilirsiniz. \n\n Uygulama için geri bildirim göndermek
         isterseniz de %3s adresine mail atabilirsiniz.</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

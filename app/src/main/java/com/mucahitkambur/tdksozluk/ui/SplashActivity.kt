@@ -4,7 +4,9 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.mucahitkambur.tdksozluk.model.WordSingleton
 import com.mucahitkambur.tdksozluk.network.local.AppDatabase
 import com.mucahitkambur.tdksozluk.ui.main.MainViewModel
 import com.mucahitkambur.tdksozluk.util.*
@@ -27,6 +29,9 @@ class SplashActivity : AppCompatActivity(), HasSupportFragmentInjector {
     lateinit var appExecutors: AppExecutors
 
     @Inject
+    lateinit var wordSingleton: WordSingleton
+
+    @Inject
     lateinit var sharedPreferences: SharedPreferences
 
     lateinit var viewModel: MainViewModel
@@ -35,15 +40,20 @@ class SplashActivity : AppCompatActivity(), HasSupportFragmentInjector {
         super.onCreate(savedInstanceState)
         viewModel = viewModelProvider(viewModelFactory)
 
+        observeAutocompFromDb()
+
         if(sharedPreferences.getBoolean("is_first", true)){
             viewModel.autocomplete()
-            observeAutocomp()
+            observeAutocompFromNetwork()
         }else {
             startHomeActivity()
         }
+
+
+        viewModel.autocompleteDb()
     }
 
-    private fun observeAutocomp(){
+    private fun observeAutocompFromNetwork(){
         viewModel.autocompResult.observe(this, EventObserver { it ->
             if(it.status == Status.SUCCESS){
                 it.data?.let { autocomp ->
@@ -55,6 +65,16 @@ class SplashActivity : AppCompatActivity(), HasSupportFragmentInjector {
                 }
             }else if (it.status == Status.ERROR){
 
+            }
+        })
+    }
+
+    private fun observeAutocompFromDb(){
+
+        viewModel.autoCompleteDbResult.observe(this, Observer {
+            val x = 5
+            it?.let {
+                wordSingleton.autocomplete?.value = it
             }
         })
     }

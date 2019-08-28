@@ -1,5 +1,7 @@
 package com.mucahitkambur.tdksozluk.network.local
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -11,8 +13,8 @@ interface AutocompDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     @JvmSuppressWildcards
-    fun insert(objects: List<Autocomplete>)
+    fun insert(objects: List<Autocomplete>?)
 
     @Query("SELECT * FROM table_autocomp")
-    fun getAutocomp(): MutableList<Autocomplete>
+    fun getAutocomp(): LiveData<List<Autocomplete>>
 }

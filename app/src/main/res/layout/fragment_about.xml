@@ -33,7 +33,6 @@
         android:layout_marginTop="75dp"
         app:srcCompat="@drawable/ic_splash"/>
 
-
         <TextView
             android:id="@+id/text_app_name"
             android:layout_width="wrap_content"

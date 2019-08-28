@@ -37,6 +37,13 @@ android {
     }
 }
 
+android {
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
 dependencies {
     def nav_version = "2.2.0-alpha01"
     def dagger_version = "2.16"
@@ -79,4 +86,5 @@ dependencies {
 
     //3th Party
     implementation 'com.github.arimorty:floatingsearchview:2.1.1'
+    implementation 'com.github.Ferfalk:SimpleSearchView:0.1.4'
 }
