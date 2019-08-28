@@ -57,8 +57,6 @@ class SplashActivity : AppCompatActivity(), HasSupportFragmentInjector {
                     sharedPreferences.edit().putBoolean("is_first", false).apply()
                     startHomeActivity()
                 }
-            }else if (it.status == Status.ERROR){
-
             }
         })
     }

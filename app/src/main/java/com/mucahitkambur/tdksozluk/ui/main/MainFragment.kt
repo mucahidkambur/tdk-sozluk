@@ -92,9 +92,8 @@ class MainFragment : Fragment(), Injectable {
                     pager_mistakes.adapter = PageAdapter(it.syyd)
                     swipe_main.isRefreshing = false
                 }
-
             }else if (it.status == Status.ERROR){
-
+                showError(it.message)
             }
         })
     }

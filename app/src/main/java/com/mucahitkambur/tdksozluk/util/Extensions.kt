@@ -6,6 +6,7 @@ import android.net.NetworkInfo
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.*
+import com.tapadoo.alerter.Alerter
 
 inline fun <reified VM : ViewModel> Fragment.viewModelProvider(
     provider: ViewModelProvider.Factory
@@ -22,4 +23,11 @@ fun hasNetwork(context: Context): Boolean? {
     if (activeNetwork != null && activeNetwork.isConnectedOrConnecting)
         isConnected = true
     return isConnected
+}
+
+fun Fragment.showError(message: String?) {
+    Alerter.create(activity)
+        .setTitle(message ?: "")
+        .setBackgroundColorRes(R.color.red)
+        .show()
 }

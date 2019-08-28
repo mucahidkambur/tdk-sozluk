@@ -85,6 +85,6 @@ dependencies {
     kapt "com.android.databinding:compiler:3.1.4"
 
     //3th Party
-    implementation 'com.github.arimorty:floatingsearchview:2.1.1'
     implementation 'com.github.Ferfalk:SimpleSearchView:0.1.4'
+    implementation 'com.tapadoo.android:alerter:4.0.2'
 }
