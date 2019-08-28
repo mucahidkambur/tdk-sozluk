@@ -2,10 +2,10 @@ package com.mucahitkambur.tdksozluk.network.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.mucahitkambur.tdksozluk.model.Autocomplete
+import com.mucahitkambur.tdksozluk.model.Suggestion
 
-@Database(entities = [Autocomplete::class], version = 1)
+@Database(entities = [Suggestion::class], version = 1)
 abstract class AppDatabase : RoomDatabase(){
 
-    abstract fun autocompDao(): AutocompDao
+    abstract fun suggestionDao(): SuggestionDao
 }

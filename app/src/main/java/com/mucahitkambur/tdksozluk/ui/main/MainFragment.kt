@@ -57,8 +57,8 @@ class MainFragment : Fragment(), Injectable {
         super.onActivityCreated(savedInstanceState)
 
         initView()
-        viewModel.content()
-        observeContent()
+        viewModel.mainContent()
+        observeMainContent()
         observeWebView()
     }
 
@@ -71,7 +71,7 @@ class MainFragment : Fragment(), Injectable {
         //SwipeLayout
         swipe_main.setProgressViewOffset(false, resources.getDimensionPixelSize(R.dimen.refresher_offset),
             resources.getDimensionPixelSize(R.dimen.refresher_offset_end))
-        swipe_main.setOnRefreshListener { viewModel.content(); }
+        swipe_main.setOnRefreshListener { viewModel.mainContent(); }
 
         layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
@@ -83,8 +83,8 @@ class MainFragment : Fragment(), Injectable {
         pager_mistakes.pageMargin = dimensionMargin
     }
 
-    private fun observeContent(){
-        viewModel.contenResult.observe(this, EventObserver {
+    private fun observeMainContent(){
+        viewModel.mainContentResult.observe(this, EventObserver {
             if (it.status == Status.SUCCESS){
                 it.data?.let {
                     dataBinding.content = it

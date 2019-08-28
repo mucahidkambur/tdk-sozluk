@@ -335,7 +335,7 @@
                             android:layout_margin="@dimen/margin_medium"
                             android:layout_marginBottom="@dimen/margin_medium"
                             android:foreground="?selectableItemBackground"
-                            android:onClick="@{() -> mainViewModel.startWebWiew(content.kural.get(0).url)}"
+                            android:onClick="@{() -> mainViewModel.startWebview(content.kural.get(0).url)}"
                             app:cardElevation="5dp"
                             app:cardCornerRadius="10dp">
 

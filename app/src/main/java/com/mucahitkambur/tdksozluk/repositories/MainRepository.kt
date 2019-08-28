@@ -2,7 +2,7 @@ package com.mucahitkambur.tdksozluk.repositories
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
-import com.mucahitkambur.tdksozluk.model.Autocomplete
+import com.mucahitkambur.tdksozluk.model.Suggestion
 import com.mucahitkambur.tdksozluk.model.ContentResult
 import com.mucahitkambur.tdksozluk.network.api.ApiErrorResponse
 import com.mucahitkambur.tdksozluk.network.api.ApiResponse
@@ -19,49 +19,47 @@ class MainRepository @Inject constructor(
     private val appExecutors: AppExecutors,
     private val apiService: ApiService
 ){
-    private val icerikResult = MediatorLiveData<Event<Resource<ContentResult>>>()
-    private val autocompResult = MediatorLiveData<Event<Resource<List<Autocomplete>>>>()
-    private val autocompleteDbResult = MediatorLiveData<List<Autocomplete>>()
+    private val contentResult = MediatorLiveData<Event<Resource<ContentResult>>>()
+    private val suggestionsContent = MediatorLiveData<Event<Resource<List<Suggestion>>>>()
+    private val autocompleteDbResult = MediatorLiveData<List<Suggestion>>()
 
 
-    fun icerik(): LiveData<Event<Resource<ContentResult>>> {
+    fun mainContent(): LiveData<Event<Resource<ContentResult>>> {
         appExecutors.networkIO().execute {
             val response = apiService.getContent().execute()
             when(val apiResponse = ApiResponse.create(response)){
                 is ApiSuccessResponse -> {
-                    icerikResult.postValue(Event(Resource.success(apiResponse.body)))
+                    contentResult.postValue(Event(Resource.success(apiResponse.body)))
                 }
                 is ApiErrorResponse -> {
-                    icerikResult.postValue(Event(Resource.error(apiResponse.errorMessage, null)))
+                    contentResult.postValue(Event(Resource.error(apiResponse.errorMessage, null)))
                 }
             }
         }
-        return icerikResult
+        return contentResult
     }
 
-    fun autocomplete(): LiveData<Event<Resource<List<Autocomplete>>>> {
+    fun suggestionsContent(): LiveData<Event<Resource<List<Suggestion>>>> {
         appExecutors.networkIO().execute {
             val response = apiService.getAutocomp().execute()
             when(val apiResponse = ApiResponse.create(response)){
                 is ApiSuccessResponse -> {
-                    autocompResult.postValue(Event(Resource.success(apiResponse.body)))
-                    insertAutocompToDb()
+                    suggestionsContent.postValue(Event(Resource.success(apiResponse.body)))
+                    insertSuggestionToDb()
                 }
                 is ApiErrorResponse -> {
-                    autocompResult.postValue(Event(Resource.error(apiResponse.errorMessage, null)))
+                    suggestionsContent.postValue(Event(Resource.error(apiResponse.errorMessage, null)))
                 }
             }
         }
-        return autocompResult
+        return suggestionsContent
     }
 
-    fun insertAutocompToDb(){
-        appExecutors.diskIO().execute{
-            database.autocompDao().insert(autocompResult.value?.peekContent()?.data)
-        }
+    fun insertSuggestionToDb(){
+        database.suggestionDao().insert(suggestionsContent.value?.peekContent()?.data)
     }
 
-    fun getAutocompFromDb(): LiveData<List<Autocomplete>>{
-        return database.autocompDao().getAutocomp()
+    fun getSuggestionsFromDb(): LiveData<List<Suggestion>>{
+        return database.suggestionDao().getSuggestions()
     }
 }

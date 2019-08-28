@@ -6,7 +6,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.mucahitkambur.tdksozluk.model.WordSingleton
+import com.mucahitkambur.tdksozluk.model.SuggestionSingleton
 import com.mucahitkambur.tdksozluk.network.local.AppDatabase
 import com.mucahitkambur.tdksozluk.ui.main.MainViewModel
 import com.mucahitkambur.tdksozluk.util.*
@@ -29,7 +29,7 @@ class SplashActivity : AppCompatActivity(), HasSupportFragmentInjector {
     lateinit var appExecutors: AppExecutors
 
     @Inject
-    lateinit var wordSingleton: WordSingleton
+    lateinit var suggestionSingleton: SuggestionSingleton
 
     @Inject
     lateinit var sharedPreferences: SharedPreferences
@@ -40,26 +40,20 @@ class SplashActivity : AppCompatActivity(), HasSupportFragmentInjector {
         super.onCreate(savedInstanceState)
         viewModel = viewModelProvider(viewModelFactory)
 
-        observeAutocompFromDb()
-
         if(sharedPreferences.getBoolean("is_first", true)){
-            viewModel.autocomplete()
-            observeAutocompFromNetwork()
+            viewModel.suggestionsContentResult()
+            observeSuggestionsFromNetwork()
         }else {
-            startHomeActivity()
+            viewModel.suggestionsDbResult()
+            observeSuggestionsFromDb()
         }
-
-
-        viewModel.autocompleteDb()
     }
 
-    private fun observeAutocompFromNetwork(){
-        viewModel.autocompResult.observe(this, EventObserver { it ->
+    private fun observeSuggestionsFromNetwork(){
+        viewModel.suggestionsContentResult().observe(this, EventObserver { it ->
             if(it.status == Status.SUCCESS){
-                it.data?.let { autocomp ->
-                    appExecutors.diskIO().execute {
-                        roomDatabase.autocompDao().insert(autocomp)
-                    }
+                it.data?.let { suggestions ->
+                    suggestionSingleton.suggestions = suggestions
                     sharedPreferences.edit().putBoolean("is_first", false).apply()
                     startHomeActivity()
                 }
@@ -69,12 +63,11 @@ class SplashActivity : AppCompatActivity(), HasSupportFragmentInjector {
         })
     }
 
-    private fun observeAutocompFromDb(){
-
-        viewModel.autoCompleteDbResult.observe(this, Observer {
-            val x = 5
-            it?.let {
-                wordSingleton.autocomplete?.value = it
+    private fun observeSuggestionsFromDb(){
+        viewModel.suggestionsDbResult().observe(this, Observer {
+            it?.let { suggestions ->
+                suggestionSingleton.suggestions = it
+                startHomeActivity()
             }
         })
     }

@@ -7,7 +7,7 @@ import androidx.room.Room
 import com.mucahitkambur.tdksozluk.BuildConfig
 import com.mucahitkambur.tdksozluk.network.api.ApiService
 import com.mucahitkambur.tdksozluk.network.local.AppDatabase
-import com.mucahitkambur.tdksozluk.network.local.AutocompDao
+import com.mucahitkambur.tdksozluk.network.local.SuggestionDao
 import com.mucahitkambur.tdksozluk.util.LiveDataCallAdapterFactory
 import dagger.Module
 import dagger.Provides
@@ -39,8 +39,8 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideAutocompDao(database: AppDatabase): AutocompDao {
-        return database.autocompDao()
+    fun provideAutocompDao(database: AppDatabase): SuggestionDao {
+        return database.suggestionDao()
     }
 
     @Singleton

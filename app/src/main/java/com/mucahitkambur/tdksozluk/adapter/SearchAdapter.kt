@@ -6,15 +6,15 @@ import android.widget.Filter
 import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.mucahitkambur.tdksozluk.databinding.ItemSearchBinding
-import com.mucahitkambur.tdksozluk.model.Autocomplete
+import com.mucahitkambur.tdksozluk.model.Suggestion
 import java.util.*
 
 class SearchAdapter (
-    private val autocomplete: List<Autocomplete>,
-    private val wordClick: (autocomplete: Autocomplete) -> Unit
+    private val suggestions: List<Suggestion>,
+    private val suggestionClick: (suggestion: Suggestion) -> Unit
 ): RecyclerView.Adapter<SearchViewHolder>(), Filterable {
 
-    private var autocompleteFiltered: List<Autocomplete> = arrayListOf()
+    private var suggestionsFiltered: List<Suggestion> = arrayListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -22,33 +22,33 @@ class SearchAdapter (
     }
 
     override fun getItemCount(): Int {
-       return autocompleteFiltered.size
+       return suggestionsFiltered.size
     }
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
-        holder.bind(autocompleteFiltered[position], wordClick)
+        holder.bind(suggestionsFiltered[position], suggestionClick)
     }
 
     override fun getFilter(): Filter {
         return object: Filter(){
             override fun performFiltering(text: CharSequence?): FilterResults {
-                val filteredList = mutableListOf<Autocomplete>()
-                for (word in autocomplete){
-                    if (word.madde.startsWith(text.toString().toLowerCase(Locale.getDefault()), true) &&
+                val filteredList = mutableListOf<Suggestion>()
+                for (suggestion in suggestions){
+                    if (suggestion.madde.startsWith(text.toString().toLowerCase(Locale.getDefault()), true) &&
                             filteredList.size < 11){
-                        filteredList.add(word)
+                        filteredList.add(suggestion)
                     }
                 }
 
-                autocompleteFiltered = filteredList
+                suggestionsFiltered = filteredList
 
                 val filterResult = FilterResults()
-                filterResult.values = autocompleteFiltered
+                filterResult.values = suggestionsFiltered
                 return filterResult
             }
 
             override fun publishResults(p0: CharSequence?, results: FilterResults?) {
-                autocompleteFiltered = results?.values as List<Autocomplete>
+                suggestionsFiltered = results?.values as List<Suggestion>
                 notifyDataSetChanged()
             }
 
@@ -60,10 +60,10 @@ class SearchViewHolder(
     val binding: ItemSearchBinding
 ): RecyclerView.ViewHolder(binding.root){
 
-    fun bind(word: Autocomplete,
-             wordClick: ((autocomplete: Autocomplete) -> Unit)){
-        binding.root.setOnClickListener { wordClick.invoke(word) }
-        binding.word = word.madde
+    fun bind(suggestion: Suggestion,
+             suggestioClick: ((suggestion: Suggestion) -> Unit)){
+        binding.root.setOnClickListener { suggestioClick.invoke(suggestion) }
+        binding.suggestion = suggestion.madde
         binding.executePendingBindings()
     }
 }

@@ -1,14 +1,12 @@
 package com.mucahitkambur.tdksozluk.ui.main
 
-import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import com.mucahitkambur.tdksozluk.model.Autocomplete
+import com.mucahitkambur.tdksozluk.model.Suggestion
 import com.mucahitkambur.tdksozluk.model.ContentResult
-import com.mucahitkambur.tdksozluk.model.WordSingleton
-import com.mucahitkambur.tdksozluk.network.local.AppDatabase
+import com.mucahitkambur.tdksozluk.model.SuggestionSingleton
 import com.mucahitkambur.tdksozluk.repositories.MainRepository
 import com.mucahitkambur.tdksozluk.util.Event
 import com.mucahitkambur.tdksozluk.util.Resource
@@ -17,50 +15,32 @@ import com.mucahitkambur.tdksozluk.util.START_RULE_WEBVIEW
 
 
 class MainViewModel @Inject constructor(
-    repository: MainRepository,
-    private val database: AppDatabase,
-    private val wordSingleton: WordSingleton
+    private val repository: MainRepository
 ): ViewModel() {
 
-    private val _content = MutableLiveData<Event<Unit>>()
-    private val _autocompl = MutableLiveData<Event<Unit>>()
-    private val _autocomplDb = MutableLiveData<Unit>()
-    private val clickData = MutableLiveData<Pair<Int, String>>()
+    private val _mainContent = MutableLiveData<Event<Unit>>()
+    private val _click = MutableLiveData<Pair<Int, String>>()
 
-    init {
-        repository.getAutocompFromDb(
-            {
+    val mainContentResult: LiveData<Event<Resource<ContentResult>>> = Transformations
+        .switchMap(_mainContent){ repository.mainContent() }
 
-            }
-        )
+    fun mainContent(){
+        _mainContent.value = Event(Unit)
     }
 
-    val contenResult: LiveData<Event<Resource<ContentResult>>> = Transformations
-        .switchMap(_content){ repository.icerik() }
-
-    fun content(){
-        _content.value = Event(Unit)
+    fun suggestionsContentResult(): LiveData<Event<Resource<List<Suggestion>>>>{
+        return repository.suggestionsContent()
     }
 
-    val autocompResult: LiveData<Event<Resource<List<Autocomplete>>>> = Transformations
-        .switchMap(_autocompl){ repository.autocomplete() }
-
-    fun autocomplete(){
-        _autocompl.value = Event(Unit)
-    }
-
-    val autoCompleteDbResult: LiveData<List<Autocomplete>> = Transformations
-        .switchMap(_autocomplDb) {repository.getAutocompFromDb()}
-
-    fun autocompleteDb(){
-        _autocomplDb.value = (Unit)
+    fun suggestionsDbResult() : LiveData<List<Suggestion>> {
+        return repository.getSuggestionsFromDb()
     }
 
     fun webviewResult() : MutableLiveData<Pair<Int, String>> {
-        return clickData
+        return _click
     }
 
-    fun startWebWiew(value: String){
-        clickData.value = Pair(START_RULE_WEBVIEW, value)
+    fun startWebview(value: String){
+        _click.value = Pair(START_RULE_WEBVIEW, value)
     }
 }

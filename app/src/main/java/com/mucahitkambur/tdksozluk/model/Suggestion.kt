@@ -10,8 +10,8 @@ import com.arlib.floatingsearchview.suggestions.model.SearchSuggestion
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
-@Entity(tableName = "table_autocomp")
-data class Autocomplete(
+@Entity(tableName = "table_suggestions")
+data class Suggestion(
 
     @SerializedName("madde")
     @ColumnInfo(name = "kelime")
