@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.15"/>
+            app:layout_constraintGuide_percent="0.20"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -31,11 +31,13 @@
                 <com.ferfalk.simplesearchview.SimpleSearchView
                     android:id="@+id/searchView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="60dp"
+                    android:layout_margin="@dimen/margin_normal"
                     android:layout_centerVertical="true"
                     app:voiceSearch="true"
                     app:type="card"
-                    android:background="@color/colorPrimary" />
+                    app:searchBackIcon="@drawable/ic_search"
+                    android:background="@color/blue" />
 
         </RelativeLayout>
 
