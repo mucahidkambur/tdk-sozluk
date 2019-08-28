@@ -6,6 +6,7 @@ import android.net.NetworkInfo
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.*
+import com.mucahitkambur.tdksozluk.R
 import com.tapadoo.alerter.Alerter
 
 inline fun <reified VM : ViewModel> Fragment.viewModelProvider(
