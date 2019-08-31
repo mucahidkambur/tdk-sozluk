@@ -6,11 +6,15 @@
     <data>
         <variable
             name="content"
-            type="com.mucahitkambur.tdksozluk.model.ContentResult" />
+            type="com.mucahitkambur.tdksozluk.model.main.ContentResult" />
 
         <variable
             name="mainViewModel"
             type="com.mucahitkambur.tdksozluk.ui.main.MainViewModel" />
+
+        <variable
+            name="isVisible"
+            type="Boolean" />
     </data>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -40,7 +44,8 @@
                     android:paddingEnd="@dimen/margin_normal"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent">
+                    app:layout_constraintRight_toRightOf="parent"
+                    visibleInvisible="@{isVisible}">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -175,10 +180,18 @@
                     app:cardBackgroundColor="@color/background"
                     app:cardCornerRadius="15dp">
 
+                    <ProgressBar
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/margin_mega"
+                        visibleGone="@{!isVisible}"/>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        visibleInvisible="@{isVisible}">
 
                         <TextView
                             android:id="@+id/text_frequent_mistakes_title"

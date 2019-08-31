@@ -88,11 +88,15 @@ class MainFragment : Fragment(), Injectable {
             if (it.status == Status.SUCCESS){
                 it.data?.let {
                     dataBinding.content = it
+                    dataBinding.isVisible = true
                     pager_mixed.adapter = PageAdapter(it.karistirma)
                     pager_mistakes.adapter = PageAdapter(it.syyd)
                     swipe_main.isRefreshing = false
                 }
-            }else if (it.status == Status.ERROR){
+            }else if (it.status == Status.LOADING)
+                dataBinding.isVisible = false
+            else if (it.status == Status.ERROR){
+                dataBinding.isVisible = true
                 showError(it.message)
             }
         })

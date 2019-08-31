@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="type"
+            type="String" />
+
+        <variable
+            name="mean"
+            type="com.mucahitkambur.tdksozluk.model.search.AnlamlarListe" />
+    </data>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:layout_marginTop="@dimen/margin_medium">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{mean.anlam_sira}" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dot" />
+
+            <TextView
+                style="@style/TextAppearance.Word.Type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{mean.ozelliklerListe == null ? String.format(@string/sifat) : mean.ozelliklerListe.get(0).tam_adi}"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_low"
+                android:text="@{mean.anlam}" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyc_example"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            visibleGone="@{mean.orneklerListe == null ? false : true}"/>
+
+    </LinearLayout>
+</layout>

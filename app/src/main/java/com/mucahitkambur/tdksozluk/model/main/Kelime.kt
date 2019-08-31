@@ -1,8 +1,8 @@
-package com.mucahitkambur.tdksozluk.model
+package com.mucahitkambur.tdksozluk.model.main
 
 import com.google.gson.annotations.SerializedName
 
-data class Atasoz(
+data class Kelime(
     @field:SerializedName("madde")
     val madde: String,
     @field:SerializedName("anlam")

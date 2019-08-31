@@ -2,8 +2,8 @@ package com.mucahitkambur.tdksozluk.repositories
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
-import com.mucahitkambur.tdksozluk.model.Suggestion
-import com.mucahitkambur.tdksozluk.model.ContentResult
+import com.mucahitkambur.tdksozluk.model.search.Suggestion
+import com.mucahitkambur.tdksozluk.model.main.ContentResult
 import com.mucahitkambur.tdksozluk.network.api.ApiErrorResponse
 import com.mucahitkambur.tdksozluk.network.api.ApiResponse
 import com.mucahitkambur.tdksozluk.network.api.ApiService
@@ -21,7 +21,6 @@ class MainRepository @Inject constructor(
 ){
     private val contentResult = MediatorLiveData<Event<Resource<ContentResult>>>()
     private val suggestionsContent = MediatorLiveData<Event<Resource<List<Suggestion>>>>()
-    private val autocompleteDbResult = MediatorLiveData<List<Suggestion>>()
 
 
     fun mainContent(): LiveData<Event<Resource<ContentResult>>> {
@@ -41,7 +40,7 @@ class MainRepository @Inject constructor(
 
     fun suggestionsContent(): LiveData<Event<Resource<List<Suggestion>>>> {
         appExecutors.networkIO().execute {
-            val response = apiService.getAutocomp().execute()
+            val response = apiService.getSuggestions().execute()
             when(val apiResponse = ApiResponse.create(response)){
                 is ApiSuccessResponse -> {
                     suggestionsContent.postValue(Event(Resource.success(apiResponse.body)))

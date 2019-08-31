@@ -3,7 +3,7 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimary">@color/colorAccent</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:statusBarColor">@color/blue</item>
@@ -25,6 +25,34 @@
         <item name="itemTextAppearanceInactive">@style/TextAppearance.BottomNavigationView</item>
         <item name="itemIconSize">@dimen/bottom_navigation_icon_size</item>
         <item name="labelVisibilityMode">unlabeled</item>
+    </style>
+
+    <style name="Base.Widget.TabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">@android:color/transparent</item>
+        <item name="tabIndicatorHeight">0dp</item>
+        <item name="tabTextColor">#8A8A8A</item>
+        <item name="tabRippleColor">@null</item>
+    </style>
+
+    <style name="TextAppearance.Header.Title" parent="TextAppearance.AppCompat.Small">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/text_size_h1</item>
+    </style>
+
+    <style name="TextAppearance.Title" parent="TextAppearance.AppCompat.Small">
+        <item name="android:textSize">@dimen/text_size_h2</item>
+        <item name="android:textColor">@color/blue</item>
+    </style>
+
+    <style name="TextAppearance.Word.Type" parent="TextAppearance.AppCompat.Small">
+        <item name="android:textSize">@dimen/text_size_h5</item>
+        <item name="android:textColor">@color/blue</item>
+        <item name="android:textStyle">italic</item>
+    </style>
+
+    <style name="TextAppearance.Word.Example" parent="TextAppearance.AppCompat.Small">
+        <item name="android:textSize">@dimen/text_size_h5</item>
+        <item name="android:textStyle">italic</item>
     </style>
 
 </resources>

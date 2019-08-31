@@ -6,6 +6,7 @@ import android.net.NetworkInfo
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.*
+import androidx.navigation.NavController
 import com.mucahitkambur.tdksozluk.R
 import com.tapadoo.alerter.Alerter
 
@@ -31,4 +32,17 @@ fun Fragment.showError(message: String?) {
         .setTitle(message ?: "")
         .setBackgroundColorRes(R.color.red)
         .show()
+}
+
+fun Fragment.findNavController(): NavController =
+    androidx.navigation.fragment.NavHostFragment.findNavController(this)
+
+fun alphabetPerCharacter(word: String): List<String> {
+
+    val characterList: MutableList<String> = arrayListOf()
+
+    for (character in word)
+        characterList.add(character.toString())
+
+    return characterList
 }

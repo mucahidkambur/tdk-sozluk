@@ -6,7 +6,7 @@ import android.widget.Filter
 import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.mucahitkambur.tdksozluk.databinding.ItemSearchBinding
-import com.mucahitkambur.tdksozluk.model.Suggestion
+import com.mucahitkambur.tdksozluk.model.search.Suggestion
 import java.util.*
 
 class SearchAdapter (

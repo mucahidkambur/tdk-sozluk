@@ -6,7 +6,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.mucahitkambur.tdksozluk.model.SuggestionSingleton
+import com.mucahitkambur.tdksozluk.model.search.SuggestionSingleton
 import com.mucahitkambur.tdksozluk.network.local.AppDatabase
 import com.mucahitkambur.tdksozluk.ui.main.MainViewModel
 import com.mucahitkambur.tdksozluk.util.*

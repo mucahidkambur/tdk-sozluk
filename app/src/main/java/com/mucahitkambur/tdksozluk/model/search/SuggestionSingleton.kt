@@ -1,4 +1,4 @@
-package com.mucahitkambur.tdksozluk.model
+package com.mucahitkambur.tdksozluk.model.search
 
 import javax.inject.Inject
 import javax.inject.Singleton

@@ -1,5 +1,6 @@
 package com.mucahitkambur.tdksozluk.di
 
+import com.mucahitkambur.tdksozluk.ui.search.SearchDetailFragment
 import com.mucahitkambur.tdksozluk.ui.main.MainFragment
 import com.mucahitkambur.tdksozluk.ui.search.SearchFragment
 import dagger.Module
@@ -12,5 +13,8 @@ abstract class FragmentModule {
     abstract fun contributeMainFragment(): MainFragment
 
     @ContributesAndroidInjector
-    abstract fun contributeSearch(): SearchFragment
+    abstract fun contributeSearchFragment(): SearchFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeSearchDetailFragment(): SearchDetailFragment
 }

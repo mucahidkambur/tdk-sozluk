@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="example"
+            type="com.mucahitkambur.tdksozluk.model.search.OrneklerListe" />
+    </data>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_large">
+
+        <TextView
+            style="@style/TextAppearance.Word.Example"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{example.ornek}"/>
+
+    </LinearLayout>
+</layout>

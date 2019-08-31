@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.viewpager.widget.PagerAdapter
 import com.mucahitkambur.tdksozluk.databinding.ItemPagerBinding
-import com.mucahitkambur.tdksozluk.model.Karistirma
+import com.mucahitkambur.tdksozluk.model.main.Karistirma
 
 class PageAdapter(private val karistirma: List<Karistirma>): PagerAdapter() {
 

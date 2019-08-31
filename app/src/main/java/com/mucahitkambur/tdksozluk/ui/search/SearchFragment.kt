@@ -14,9 +14,10 @@ import com.mucahitkambur.tdksozluk.R
 import com.mucahitkambur.tdksozluk.adapter.SearchAdapter
 import com.mucahitkambur.tdksozluk.databinding.FragmentSearchBinding
 import com.mucahitkambur.tdksozluk.di.Injectable
-import com.mucahitkambur.tdksozluk.model.SuggestionSingleton
+import com.mucahitkambur.tdksozluk.model.search.SuggestionSingleton
 import com.mucahitkambur.tdksozluk.network.local.AppDatabase
 import com.mucahitkambur.tdksozluk.util.AppExecutors
+import com.mucahitkambur.tdksozluk.util.findNavController
 import com.mucahitkambur.tdksozluk.util.viewModelProvider
 import javax.inject.Inject
 
@@ -68,6 +69,11 @@ class SearchFragment : Fragment(), Injectable {
 
         searchAdapter = SearchAdapter(suggestionSingleton.suggestions!!) {
 
+            findNavController().navigate(
+                SearchFragmentDirections.actionSearchDetail(
+                    it.madde
+                )
+            )
         }
 
         dataBinding.recycSuggestion.adapter = searchAdapter

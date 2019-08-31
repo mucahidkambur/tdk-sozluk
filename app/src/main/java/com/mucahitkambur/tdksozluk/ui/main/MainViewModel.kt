@@ -4,9 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import com.mucahitkambur.tdksozluk.model.Suggestion
-import com.mucahitkambur.tdksozluk.model.ContentResult
-import com.mucahitkambur.tdksozluk.model.SuggestionSingleton
+import com.mucahitkambur.tdksozluk.model.search.Suggestion
+import com.mucahitkambur.tdksozluk.model.main.ContentResult
 import com.mucahitkambur.tdksozluk.repositories.MainRepository
 import com.mucahitkambur.tdksozluk.util.Event
 import com.mucahitkambur.tdksozluk.util.Resource

@@ -1,4 +1,4 @@
-package com.mucahitkambur.tdksozluk.model
+package com.mucahitkambur.tdksozluk.model.search
 
 import android.os.Parcel
 import android.os.Parcelable

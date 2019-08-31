@@ -6,6 +6,8 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
+apply plugin: 'androidx.navigation.safeargs'
+
 android {
     compileSdkVersion 29
     defaultConfig {
@@ -33,6 +35,7 @@ android {
             buildConfigField "String", "END_POINT", "\"${end_point}\""
             buildConfigField "String", "GITHUB_URL", "\"${github_url}\""
             buildConfigField "String", "MAIL_ADDRESS", "\"${mail_address}\""
+            buildConfigField "String", "ALPHABET_IMG_URL", "\"${alphabet_image_url}\""
         }
     }
 }
@@ -87,4 +90,6 @@ dependencies {
     //3th Party
     implementation 'com.github.Ferfalk:SimpleSearchView:0.1.4'
     implementation 'com.tapadoo.android:alerter:4.0.2'
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
 }

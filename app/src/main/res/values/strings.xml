@@ -13,12 +13,19 @@
     <string name="about">Hakkımızda</string>
 
     <string name="colon">:</string>
+    <string name="dash">-</string>
+    <string name="dot">.</string>
+
+    <string name="means">Anlamlar</string>
+    <string name="proverbs">Atasözleri ve Deyimler</string>
+    <string name="finger_alphabet">Parmak Alfabesi</string>
+    <string name="sifat">sıfat</string>
+
+    <string name="alphabet_ext">%1$s%2$s.gif</string>
     <string name="version">Versiyon: %s</string>
     <string name="about_app">%1s, Türk Dil Kurumunun verilerini kullanan açık kaynak bir sözlük
         uygulamasıdır. Projeye katkıda bulunmak veya kaynak kodlarını incelemek için %2s adresine
         gidebilirsiniz. \n\n Uygulama için geri bildirim göndermek
         isterseniz de %3s adresine mail atabilirsiniz.</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    
 </resources>

@@ -15,4 +15,13 @@
 
     <dimen name="refresher_offset">50dp</dimen>
     <dimen name="refresher_offset_end">125dp</dimen>
+
+    <dimen name="search_detail_word">80dp</dimen>
+
+    <dimen name="text_size_h1">27sp</dimen>
+    <dimen name="text_size_h2">21sp</dimen>
+    <dimen name="text_size_h3">19sp</dimen>
+    <dimen name="text_size_h4">17sp</dimen>
+    <dimen name="text_size_h5">15sp</dimen>
+    <dimen name="text_size_h6">13sp</dimen>
 </resources>

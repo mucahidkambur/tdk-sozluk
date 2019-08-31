@@ -1,4 +1,4 @@
-package com.mucahitkambur.tdksozluk.model
+package com.mucahitkambur.tdksozluk.model.main
 
 import com.google.gson.annotations.SerializedName
 
