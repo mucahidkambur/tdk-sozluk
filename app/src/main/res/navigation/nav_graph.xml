@@ -31,6 +31,12 @@
         <argument android:name="word"
             app:argType="string"/>
 
+        <action
+            android:id="@+id/action_nav_search_detail_to_nav_search"
+            app:destination="@id/nav_search"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
+
     </fragment>
 
     <fragment

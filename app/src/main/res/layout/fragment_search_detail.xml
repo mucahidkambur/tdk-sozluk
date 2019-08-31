@@ -4,6 +4,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
+        <variable
+            name="isVisible"
+            type="Boolean" />
+
         <variable
             name="word"
             type="String" />
@@ -49,6 +54,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_huge"
+                    visibleInvisible="@{isVisible}"
                     capitalizeText="@{word}"/>
             </RelativeLayout>
 
@@ -61,7 +67,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    visibleInvisible="@{isVisible}">
 
                     <TextView
                         style="@style/TextAppearance.Title"
@@ -114,6 +121,12 @@
             </androidx.core.widget.NestedScrollView>
 
         </LinearLayout>
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center_vertical"
+            visibleGone="@{!isVisible}"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

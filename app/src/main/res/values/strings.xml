@@ -19,6 +19,7 @@
     <string name="means">Anlamlar</string>
     <string name="proverbs">Atasözleri ve Deyimler</string>
     <string name="finger_alphabet">Parmak Alfabesi</string>
+    <string name="delete_history">Geçmişi Sil</string>
     <string name="sifat">sıfat</string>
 
     <string name="alphabet_ext">%1$s%2$s.gif</string>

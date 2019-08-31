@@ -7,10 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.ferfalk.simplesearchview.SimpleSearchView
 
 import com.mucahitkambur.tdksozluk.R
+import com.mucahitkambur.tdksozluk.adapter.HistoryAdapter
 import com.mucahitkambur.tdksozluk.adapter.SearchAdapter
 import com.mucahitkambur.tdksozluk.databinding.FragmentSearchBinding
 import com.mucahitkambur.tdksozluk.di.Injectable
@@ -62,18 +64,17 @@ class SearchFragment : Fragment(), Injectable {
         super.onActivityCreated(savedInstanceState)
 
         initView()
+        observeHistory()
     }
 
     private fun initView(){
 
+        dataBinding.textDeleteHistory.setOnClickListener {
+            viewModel.deleteHistory()
+        }
 
         searchAdapter = SearchAdapter(suggestionSingleton.suggestions!!) {
-
-            findNavController().navigate(
-                SearchFragmentDirections.actionSearchDetail(
-                    it.madde
-                )
-            )
+            navigateToSearchDetail(it.madde)
         }
 
         dataBinding.recycSuggestion.adapter = searchAdapter
@@ -87,6 +88,8 @@ class SearchFragment : Fragment(), Injectable {
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 searchAdapter?.filter?.filter(newText)
+                dataBinding.recycSuggestion.visibility = View.VISIBLE
+                dataBinding.linearHistory.visibility = View.GONE
                 return false
             }
 
@@ -94,5 +97,28 @@ class SearchFragment : Fragment(), Injectable {
                 return false
             }
         })
+    }
+
+    private fun observeHistory(){
+        viewModel.historyDbResult().observe(this, Observer {
+            if (!it.isNullOrEmpty()){
+                dataBinding.linearHistory.visibility = View.VISIBLE
+                dataBinding.textDeleteHistory.visibility = View.VISIBLE
+            }else
+                dataBinding.textDeleteHistory.visibility = View.GONE
+
+            dataBinding.recycHistory.adapter = HistoryAdapter(it, historyClick = {
+                navigateToSearchDetail(it.word)
+            })
+
+        })
+    }
+
+    private fun navigateToSearchDetail(word: String){
+        findNavController().navigate(
+            SearchFragmentDirections.actionSearchDetail(
+                word
+            )
+        )
     }
 }

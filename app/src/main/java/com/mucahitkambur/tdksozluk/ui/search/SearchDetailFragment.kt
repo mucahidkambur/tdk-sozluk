@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.mucahitkambur.tdksozluk.R
@@ -42,12 +43,17 @@ class SearchDetailFragment : Fragment(), Injectable {
             false
         ).apply {
             word = args.word
+
         }
         return dataBinding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        dataBinding.toolbarCommon.setOnClickListener{
+            findNavController().navigate(SearchDetailFragmentDirections.actionNavSearchDetailToNavSearch())
+        }
 
         observeSearch()
         viewModel.searchWord(args.word)
@@ -56,7 +62,6 @@ class SearchDetailFragment : Fragment(), Injectable {
     private fun observeSearch(){
         viewModel.searchResult.observe(this, EventObserver {
             if (it.status == Status.SUCCESS){
-
                 val meanList = it.data!![0].anlamlarListe
                 val proverbList = it.data!![0].atasozu
                 val alphabetList = alphabetPerCharacter(args.word)
@@ -66,6 +71,11 @@ class SearchDetailFragment : Fragment(), Injectable {
                 if (!proverbList.isNullOrEmpty())
                     dataBinding.recycSearchProverb.adapter = SearchDetailProverbAdapter(proverbList)
                 dataBinding.recycSearchAlphabet.adapter = SearchDetailAlphabetAdapter(alphabetList)
+                dataBinding.isVisible = true
+            }else if (it.status == Status.LOADING)
+                dataBinding.isVisible = false
+            else if (it.status == Status.ERROR){
+                dataBinding.isVisible = true
             }
         })
     }
