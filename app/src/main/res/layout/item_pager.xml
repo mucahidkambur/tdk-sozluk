@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -32,21 +33,34 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:orientation="horizontal"
-                    android:gravity="center_vertical">
+                    android:gravity="center_vertical|center_horizontal">
 
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/ic_false"
-                        android:layout_weight="0.7"/>
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
 
-                    <TextView
-                        android:id="@+id/txYanlisBir"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="@{mixed.yanlis}"
-                        android:maxLines="4"
-                        android:layout_weight="1"/>
+                        <ImageView
+                            android:id="@+id/img_false"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:paddingStart="@dimen/margin_medium"
+                            android:paddingTop="@dimen/margin_medium"
+                            android:paddingBottom="@dimen/margin_medium"
+                            app:srcCompat="@drawable/ic_false"/>
+
+                        <TextView
+                            android:id="@+id/text_false"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_toEndOf="@+id/img_false"
+                            android:text="@{mixed.yanlis}"
+                            android:gravity="center_vertical"
+                            android:padding="@dimen/margin_medium"
+                            android:maxLines="4"
+                            android:foreground="?selectableItemBackground"
+                            tools:text="araba"/>
+
+                    </RelativeLayout>
                 </LinearLayout>
 
                 <LinearLayout
@@ -54,21 +68,32 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:orientation="horizontal"
-                    android:gravity="center_vertical">
+                    android:gravity="center_vertical|center_horizontal">
 
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/ic_true"
-                        android:layout_weight="0.7"/>
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
 
-                    <TextView
-                        android:id="@+id/txDogruBir"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:maxLines="4"
-                        android:text="@{mixed.dogru}"
-                        android:layout_weight="1"/>
+                        <ImageView
+                            android:id="@+id/img_true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingStart="@dimen/margin_medium"
+                            android:paddingTop="@dimen/margin_medium"
+                            android:paddingBottom="@dimen/margin_medium"
+                            app:srcCompat="@drawable/ic_true"/>
+
+                        <TextView
+                            android:id="@+id/text_true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@+id/img_true"
+                            android:text="@{mixed.dogru}"
+                            android:padding="@dimen/margin_medium"
+                            android:maxLines="4"
+                            android:foreground="?selectableItemBackground"/>
+
+                    </RelativeLayout>
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>

@@ -20,6 +20,7 @@ import com.mucahitkambur.tdksozluk.model.search.SuggestionSingleton
 import com.mucahitkambur.tdksozluk.network.local.AppDatabase
 import com.mucahitkambur.tdksozluk.util.AppExecutors
 import com.mucahitkambur.tdksozluk.util.findNavController
+import com.mucahitkambur.tdksozluk.util.startSearchDetail
 import com.mucahitkambur.tdksozluk.util.viewModelProvider
 import javax.inject.Inject
 
@@ -74,7 +75,7 @@ class SearchFragment : Fragment(), Injectable {
         }
 
         searchAdapter = SearchAdapter(suggestionSingleton.suggestions!!) {
-            navigateToSearchDetail(it.madde)
+            startSearchDetail(it.madde)
         }
 
         dataBinding.recycSuggestion.adapter = searchAdapter
@@ -108,17 +109,9 @@ class SearchFragment : Fragment(), Injectable {
                 dataBinding.textDeleteHistory.visibility = View.GONE
 
             dataBinding.recycHistory.adapter = HistoryAdapter(it, historyClick = {
-                navigateToSearchDetail(it.word)
+                startSearchDetail(it.word)
             })
 
         })
-    }
-
-    private fun navigateToSearchDetail(word: String){
-        findNavController().navigate(
-            SearchFragmentDirections.actionSearchDetail(
-                word
-            )
-        )
     }
 }

@@ -7,14 +7,15 @@ import androidx.viewpager.widget.PagerAdapter
 import com.mucahitkambur.tdksozluk.databinding.ItemPagerBinding
 import com.mucahitkambur.tdksozluk.model.main.Karistirma
 
-class PageAdapter(private val karistirma: List<Karistirma>): PagerAdapter() {
+class PageAdapter(private val mixed: List<Karistirma>,
+                  private val mixedClick: (word: String) -> Unit): PagerAdapter() {
 
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
         return view === `object`
     }
 
     override fun getCount(): Int {
-        return karistirma.size
+        return mixed.size
     }
 
     override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
@@ -24,7 +25,9 @@ class PageAdapter(private val karistirma: List<Karistirma>): PagerAdapter() {
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val inflater = LayoutInflater.from(container.context)
         val binding = ItemPagerBinding.inflate(inflater, container, false)
-        binding.mixed = karistirma[position]
+        binding.mixed = mixed[position]
+        binding.textFalse.setOnClickListener{mixedClick.invoke(mixed[position].yanlis)}
+        binding.textTrue.setOnClickListener{mixedClick.invoke(mixed[position].dogru)}
         container.addView(binding.root)
         return binding.root
     }

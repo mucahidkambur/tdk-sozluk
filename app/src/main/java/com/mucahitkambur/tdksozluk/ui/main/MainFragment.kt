@@ -89,8 +89,10 @@ class MainFragment : Fragment(), Injectable {
                 it.data?.let {
                     dataBinding.content = it
                     dataBinding.isVisible = true
-                    pager_mixed.adapter = PageAdapter(it.karistirma)
-                    pager_mistakes.adapter = PageAdapter(it.syyd)
+                    pager_mixed.adapter = PageAdapter(it.karistirma) {
+                        startSearchDetail(it)
+                    }
+                    pager_mistakes.adapter = PageAdapter(it.syyd) {}
                     swipe_main.isRefreshing = false
                 }
             }else if (it.status == Status.LOADING)

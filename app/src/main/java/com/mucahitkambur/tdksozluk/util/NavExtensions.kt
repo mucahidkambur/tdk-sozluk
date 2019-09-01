@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentActivity
 import com.mucahitkambur.tdksozluk.model.main.Url
 import com.mucahitkambur.tdksozluk.ui.MainActivity
 import com.mucahitkambur.tdksozluk.ui.WebViewActivity
+import com.mucahitkambur.tdksozluk.ui.search.SearchFragmentDirections
 
 fun FragmentActivity.startHomeActivity(){
     startActivity(MainActivity.newIntent(this))
@@ -13,4 +14,12 @@ fun FragmentActivity.startHomeActivity(){
 
 fun Fragment.startWebView(url: Url){
     startActivity(WebViewActivity.newIntent(requireContext(), url))
+}
+
+fun Fragment.startSearchDetail(word: String){
+    findNavController().navigate(
+        SearchFragmentDirections.actionSearchDetail(
+            word
+        )
+    )
 }
