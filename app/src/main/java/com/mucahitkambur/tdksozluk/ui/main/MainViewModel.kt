@@ -6,6 +6,8 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.mucahitkambur.tdksozluk.model.search.Suggestion
 import com.mucahitkambur.tdksozluk.model.main.ContentResult
+import com.mucahitkambur.tdksozluk.model.main.Kural
+import com.mucahitkambur.tdksozluk.model.main.Url
 import com.mucahitkambur.tdksozluk.repositories.MainRepository
 import com.mucahitkambur.tdksozluk.util.Event
 import com.mucahitkambur.tdksozluk.util.Resource
@@ -18,7 +20,7 @@ class MainViewModel @Inject constructor(
 ): ViewModel() {
 
     private val _mainContent = MutableLiveData<Event<Unit>>()
-    private val _click = MutableLiveData<Pair<Int, String>>()
+    private val _click = MutableLiveData<Url>()
 
     val mainContentResult: LiveData<Event<Resource<ContentResult>>> = Transformations
         .switchMap(_mainContent){ repository.mainContent() }
@@ -35,11 +37,11 @@ class MainViewModel @Inject constructor(
         return repository.getSuggestionsFromDb()
     }
 
-    fun webviewResult() : MutableLiveData<Pair<Int, String>> {
+    fun webviewResult() : MutableLiveData<Url> {
         return _click
     }
 
-    fun startWebview(value: String){
-        _click.value = Pair(START_RULE_WEBVIEW, value)
+    fun startWebview(url: Kural){
+        _click.value = Url(url.url, url.adi)
     }
 }

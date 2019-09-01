@@ -91,7 +91,8 @@
                         android:layout_marginStart="@dimen/margin_medium"
                         android:layout_marginTop="@dimen/margin_medium"
                         android:layout_marginBottom="@dimen/margin_medium"
-                        android:text="@string/proverbs"/>
+                        android:text="@string/proverbs"
+                        visibleGone="@{searchContent.atasozu == null ? false : true}"/>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recyc_search_proverb"

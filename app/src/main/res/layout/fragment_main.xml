@@ -45,6 +45,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
+                    android:visibility="invisible"
                     visibleInvisible="@{isVisible}">
 
                     <TextView
@@ -348,7 +349,7 @@
                             android:layout_margin="@dimen/margin_medium"
                             android:layout_marginBottom="@dimen/margin_medium"
                             android:foreground="?selectableItemBackground"
-                            android:onClick="@{() -> mainViewModel.startWebview(content.kural.get(0).url)}"
+                            android:onClick="@{() -> mainViewModel.startWebview(content.kural.get(0))}"
                             app:cardElevation="5dp"
                             app:cardCornerRadius="10dp">
 

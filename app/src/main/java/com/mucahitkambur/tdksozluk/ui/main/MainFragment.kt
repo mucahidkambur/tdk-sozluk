@@ -104,9 +104,7 @@ class MainFragment : Fragment(), Injectable {
 
     private fun observeWebView(){
         viewModel.webviewResult().observe(this, Observer {
-            when (it.first) {
-                START_RULE_WEBVIEW -> startWebView(it.second)
-            }
+            startWebView(it)
         })
     }
 }

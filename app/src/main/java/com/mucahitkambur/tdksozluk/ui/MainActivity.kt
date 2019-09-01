@@ -38,9 +38,8 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
     }
 
     fun isDestinationSearchDetail(): Boolean{
-        return navController().currentDestination?.id == R.id.nav_search
+        return navController().currentDestination?.id == R.id.nav_search_detail
     }
-
 
     private fun navController() = findNavController(R.id.fragment_container)
 
