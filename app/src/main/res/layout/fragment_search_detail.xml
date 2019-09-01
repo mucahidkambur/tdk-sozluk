@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.search.SearchDetailFragment"
-        android:background="@color/background"
+        android:background="@color/blue"
         android:fitsSystemWindows="true">
 
         <LinearLayout
@@ -59,13 +59,18 @@
                     capitalizeText="@{word}"/>
             </RelativeLayout>
 
-            <androidx.core.widget.NestedScrollView
+            <com.mucahitkambur.tdksozluk.view.RoundedView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:clipToPadding="false"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+                app:topLeftCornerRadius="@dimen/margin_normal"
+                app:topRightCornerRadius="@dimen/margin_normal"
+                android:background="@drawable/rounded_view_radius">
 
-                <LinearLayout
+                <androidx.core.widget.NestedScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
@@ -120,7 +125,8 @@
 
                 </LinearLayout>
 
-            </androidx.core.widget.NestedScrollView>
+                </androidx.core.widget.NestedScrollView>
+            </com.mucahitkambur.tdksozluk.view.RoundedView>
 
         </LinearLayout>
 

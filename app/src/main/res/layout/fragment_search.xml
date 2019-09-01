@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background">
+        android:background="@color/blue">
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/layout_guidline"
@@ -41,9 +41,12 @@
 
         </RelativeLayout>
 
-        <RelativeLayout
+        <com.mucahitkambur.tdksozluk.view.RoundedView
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            app:topLeftCornerRadius="@dimen/margin_normal"
+            app:topRightCornerRadius="@dimen/margin_normal"
+            android:background="@drawable/rounded_view_radius"
             app:layout_constraintTop_toBottomOf="@+id/layout_guidline"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -88,7 +91,7 @@
                 </RelativeLayout>
 
             </androidx.core.widget.NestedScrollView>
-        </RelativeLayout>
+        </com.mucahitkambur.tdksozluk.view.RoundedView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

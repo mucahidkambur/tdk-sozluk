@@ -7,7 +7,7 @@ import com.mucahitkambur.tdksozluk.model.search.History
 @Dao
 interface HistoryDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     @JvmSuppressWildcards
     fun insert(history: History)
 
