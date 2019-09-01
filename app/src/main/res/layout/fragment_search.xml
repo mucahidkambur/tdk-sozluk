@@ -41,16 +41,18 @@
 
         </RelativeLayout>
 
-        <com.mucahitkambur.tdksozluk.view.RoundedView
+        <com.github.captain_miao.optroundcardview.OptRoundCardView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:topLeftCornerRadius="@dimen/margin_normal"
-            app:topRightCornerRadius="@dimen/margin_normal"
-            android:background="@drawable/rounded_view_radius"
+            android:background="@color/background"
             app:layout_constraintTop_toBottomOf="@+id/layout_guidline"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:optRoundCardCornerRadius="@dimen/margin_normal"
+            app:optRoundCardLeftBottomCorner="false"
+            app:optRoundCardRightBottomCorner="false"
+            app:optRoundCardBottomEdges="false">
 
             <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
@@ -91,7 +93,7 @@
                 </RelativeLayout>
 
             </androidx.core.widget.NestedScrollView>
-        </com.mucahitkambur.tdksozluk.view.RoundedView>
+        </com.github.captain_miao.optroundcardview.OptRoundCardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

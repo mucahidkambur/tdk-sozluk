@@ -169,17 +169,19 @@
 
                 </LinearLayout>
 
-                <androidx.cardview.widget.CardView
+                <com.github.captain_miao.optroundcardview.OptRoundCardView
                     android:id="@+id/card_view"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_marginTop="@dimen/margin_medium"
+                    android:background="@color/background"
                     app:layout_constraintTop_toBottomOf="@+id/linear_main"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:cardElevation="5dp"
-                    app:cardBackgroundColor="@color/background"
-                    app:cardCornerRadius="15dp">
+                    app:optRoundCardCornerRadius="@dimen/margin_normal"
+                    app:optRoundCardLeftBottomCorner="false"
+                    app:optRoundCardRightBottomCorner="false"
+                    app:optRoundCardBottomEdges="false">
 
                     <ProgressBar
                         android:layout_width="wrap_content"
@@ -376,7 +378,7 @@
                         </androidx.cardview.widget.CardView>
 
                     </LinearLayout>
-                </androidx.cardview.widget.CardView>
+                </com.github.captain_miao.optroundcardview.OptRoundCardView>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

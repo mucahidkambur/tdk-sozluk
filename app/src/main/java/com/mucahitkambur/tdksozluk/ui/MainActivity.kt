@@ -4,13 +4,16 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.speech.RecognizerIntent
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.mucahitkambur.tdksozluk.R
 import com.mucahitkambur.tdksozluk.ui.search.SearchDetailFragmentDirections
+import com.mucahitkambur.tdksozluk.ui.search.SearchFragmentDirections
 import com.mucahitkambur.tdksozluk.util.findNavController
+import com.mucahitkambur.tdksozluk.util.startSearchDetail
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.activity_main.*
@@ -39,6 +42,15 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
     fun isDestinationSearchDetail(): Boolean{
         return navController().currentDestination?.id == R.id.nav_search_detail
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        val result = data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+        findNavController(R.id.fragment_container).navigate(
+            SearchFragmentDirections.actionSearchDetail(
+            result!![0]
+        ))
     }
 
     private fun navController() = findNavController(R.id.fragment_container)

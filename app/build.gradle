@@ -92,4 +92,5 @@ dependencies {
     implementation 'com.tapadoo.android:alerter:4.0.2'
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+    implementation 'com.github.captain-miao:optroundcardview:1.0.0'
 }

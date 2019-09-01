@@ -23,6 +23,8 @@ import com.mucahitkambur.tdksozluk.util.findNavController
 import com.mucahitkambur.tdksozluk.util.startSearchDetail
 import com.mucahitkambur.tdksozluk.util.viewModelProvider
 import javax.inject.Inject
+import android.content.Intent
+import android.speech.RecognizerIntent
 
 
 class SearchFragment : Fragment(), Injectable {
