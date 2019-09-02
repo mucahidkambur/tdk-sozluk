@@ -99,7 +99,7 @@ class MainFragment : Fragment(), Injectable {
                 dataBinding.isVisible = false
             else if (it.status == Status.ERROR){
                 dataBinding.isVisible = true
-                showError(it.message)
+                showError(it.message?.message)
             }
         })
     }

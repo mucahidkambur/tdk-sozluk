@@ -1,11 +1,13 @@
 package com.mucahitkambur.tdksozluk.network.api
 
+import com.google.gson.Gson
 import retrofit2.Response
+import com.mucahitkambur.tdksozluk.model.Result
 
 sealed class ApiResponse<T> {
     companion object {
         fun <T> create(error: Throwable): ApiErrorResponse<T> {
-            return ApiErrorResponse(error.message!!)
+            return ApiErrorResponse(Result(error.message!!))
         }
 
         fun <T> create(response: Response<T>): ApiResponse<T> {
@@ -17,8 +19,8 @@ sealed class ApiResponse<T> {
                     ApiSuccessResponse(body)
                 }
             } else {
-                val errorMessage = response.errorBody()?.string()
-                ApiErrorResponse(errorMessage ?: "unknown error")
+                val errorMessage = Gson().fromJson(response.errorBody()?.string(), Result::class.java)
+                ApiErrorResponse(errorMessage)
             }
         }
     }
@@ -31,4 +33,4 @@ class ApiEmptyResponse<T> : ApiResponse<T>()
 
 data class ApiSuccessResponse<T>(val body: T) : ApiResponse<T>()
 
-data class ApiErrorResponse<T>(val errorMessage: String) : ApiResponse<T>()
+data class ApiErrorResponse<T>(val errorMessage: Result) : ApiResponse<T>()

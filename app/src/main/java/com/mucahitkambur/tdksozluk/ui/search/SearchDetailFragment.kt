@@ -77,6 +77,7 @@ class SearchDetailFragment : Fragment(), Injectable {
                 dataBinding.isVisible = false
             else if (it.status == Status.ERROR){
                 dataBinding.isVisible = true
+                showError(it.message?.message)
             }
         })
     }

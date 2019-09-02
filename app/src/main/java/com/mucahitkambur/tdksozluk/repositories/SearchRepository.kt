@@ -4,14 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import com.mucahitkambur.tdksozluk.model.search.History
 import com.mucahitkambur.tdksozluk.model.search.SearchResult
-import com.mucahitkambur.tdksozluk.network.api.ApiErrorResponse
-import com.mucahitkambur.tdksozluk.network.api.ApiResponse
-import com.mucahitkambur.tdksozluk.network.api.ApiService
-import com.mucahitkambur.tdksozluk.network.api.ApiSuccessResponse
+import com.mucahitkambur.tdksozluk.network.api.*
+import com.mucahitkambur.tdksozluk.network.api.ApiException
 import com.mucahitkambur.tdksozluk.network.local.AppDatabase
 import com.mucahitkambur.tdksozluk.util.AppExecutors
 import com.mucahitkambur.tdksozluk.util.Event
 import com.mucahitkambur.tdksozluk.util.Resource
+import java.io.IOException
+import java.lang.Exception
 import javax.inject.Inject
 
 class SearchRepository @Inject constructor(
@@ -23,17 +23,30 @@ class SearchRepository @Inject constructor(
 
     fun searchContent(word: String): LiveData<Event<Resource<List<SearchResult>>>> {
         appExecutors.networkIO().execute {
-            val response = apiService.getSearchContent(word).execute()
-            when (val apiResponse = ApiResponse.create(response)) {
-                is ApiSuccessResponse -> {
-                    searchContentResult.postValue(Event(Resource.success(apiResponse.body)))
-                    insertWordToHistoryDb(History(0,apiResponse.body.get(0).madde))
+            try{
+                val response = apiService.getSearchContent(word).execute()
+                when (val apiResponse = ApiResponse.create(response)) {
+                    is ApiSuccessResponse -> {
+                        searchContentResult.postValue(Event(Resource.success(apiResponse.body)))
+                        insertWordToHistoryDb(History(0,apiResponse.body.get(0).madde))
+                    }
+                    is ApiErrorResponse -> {
+                        searchContentResult.postValue(Event(Resource.error(apiResponse.errorMessage, null)))
+                    }
                 }
-                is ApiErrorResponse -> {
-                    searchContentResult.postValue(Event(Resource.error(apiResponse.errorMessage, null)))
-                }
+            }catch (exception: Exception) {
+                val apiException = ApiException.create(exception)
+                searchContentResult.postValue(
+                    Event(
+                        Resource.error(
+                            apiException,
+                            null
+                        )
+                    )
+                )
             }
         }
+
         return searchContentResult
     }
 

@@ -44,5 +44,8 @@ data class SearchResult(
     @field:SerializedName("taki")
     val taki: Any,
     @field:SerializedName("telaffuz")
-    val telaffuz: Any
+    val telaffuz: Any,
+
+    @field:SerializedName("error")
+    val error: String
 )
