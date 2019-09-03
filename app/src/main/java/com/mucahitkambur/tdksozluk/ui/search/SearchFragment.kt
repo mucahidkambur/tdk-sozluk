@@ -18,13 +18,10 @@ import com.mucahitkambur.tdksozluk.databinding.FragmentSearchBinding
 import com.mucahitkambur.tdksozluk.di.Injectable
 import com.mucahitkambur.tdksozluk.model.search.SuggestionSingleton
 import com.mucahitkambur.tdksozluk.network.local.AppDatabase
-import com.mucahitkambur.tdksozluk.util.AppExecutors
-import com.mucahitkambur.tdksozluk.util.findNavController
-import com.mucahitkambur.tdksozluk.util.startSearchDetail
-import com.mucahitkambur.tdksozluk.util.viewModelProvider
 import javax.inject.Inject
 import android.content.Intent
 import android.speech.RecognizerIntent
+import com.mucahitkambur.tdksozluk.util.*
 
 
 class SearchFragment : Fragment(), Injectable {
@@ -59,6 +56,7 @@ class SearchFragment : Fragment(), Injectable {
             false
         ).apply {
             lifecycleOwner = this@SearchFragment
+            viewModel = this@SearchFragment.viewModel
         }
         return dataBinding.root
     }
@@ -71,20 +69,16 @@ class SearchFragment : Fragment(), Injectable {
     }
 
     private fun initView(){
-
-        dataBinding.textDeleteHistory.setOnClickListener {
-            viewModel.deleteHistory()
-        }
+        dataBinding.viewSearch.visibility = View.VISIBLE
 
         searchAdapter = SearchAdapter(suggestionSingleton.suggestions!!) {
             startSearchDetail(it.madde)
         }
-
         dataBinding.recycSuggestion.adapter = searchAdapter
+        dataBinding.recycSuggestion.addItemDecoration(divider())
+        dataBinding.recycHistory.addItemDecoration(divider())
 
-        dataBinding.searchView.visibility = View.VISIBLE
-
-        dataBinding.searchView.setOnQueryTextListener(object: SimpleSearchView.OnQueryTextListener{
+        dataBinding.viewSearch.setOnQueryTextListener(object: SimpleSearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
             }
@@ -106,14 +100,12 @@ class SearchFragment : Fragment(), Injectable {
         viewModel.historyDbResult().observe(this, Observer {
             if (!it.isNullOrEmpty()){
                 dataBinding.linearHistory.visibility = View.VISIBLE
-                dataBinding.textDeleteHistory.visibility = View.VISIBLE
             }else
-                dataBinding.textDeleteHistory.visibility = View.GONE
+                dataBinding.linearHistory.visibility = View.GONE
 
             dataBinding.recycHistory.adapter = HistoryAdapter(it, historyClick = {
                 startSearchDetail(it.word)
             })
-
         })
     }
 }

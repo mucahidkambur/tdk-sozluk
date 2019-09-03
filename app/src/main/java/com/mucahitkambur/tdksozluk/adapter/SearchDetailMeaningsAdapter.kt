@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mucahitkambur.tdksozluk.databinding.ItemLayoutMeanBinding
 import com.mucahitkambur.tdksozluk.model.search.AnlamlarListe
 
-class SearchDetailAnlamlarAdapter (
+class SearchDetailMeaningsAdapter (
     private val anlamlarListe: List<AnlamlarListe>
 ): RecyclerView.Adapter<SearchDetailViewHolder>() {
 

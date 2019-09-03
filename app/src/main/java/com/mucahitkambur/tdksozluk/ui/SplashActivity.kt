@@ -40,7 +40,7 @@ class SplashActivity : AppCompatActivity(), HasSupportFragmentInjector {
         super.onCreate(savedInstanceState)
         viewModel = viewModelProvider(viewModelFactory)
 
-        if(sharedPreferences.getBoolean("is_first", true)){
+        if(sharedPreferences.getBoolean(IS_FIRST, true)){
             viewModel.suggestionsContentResult()
             observeSuggestionsFromNetwork()
         }else {
@@ -50,11 +50,11 @@ class SplashActivity : AppCompatActivity(), HasSupportFragmentInjector {
     }
 
     private fun observeSuggestionsFromNetwork(){
-        viewModel.suggestionsContentResult().observe(this, EventObserver { it ->
+        viewModel.suggestionsContentResult().observe(this, EventObserver {
             if(it.status == Status.SUCCESS){
                 it.data?.let { suggestions ->
                     suggestionSingleton.suggestions = suggestions
-                    sharedPreferences.edit().putBoolean("is_first", false).apply()
+                    sharedPreferences.edit().putBoolean(IS_FIRST, false).apply()
                     startHomeActivity()
                 }
             }
@@ -63,7 +63,7 @@ class SplashActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
     private fun observeSuggestionsFromDb(){
         viewModel.suggestionsDbResult().observe(this, Observer {
-            it?.let { suggestions ->
+            it?.let {
                 suggestionSingleton.suggestions = it
                 startHomeActivity()
             }

@@ -6,9 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mucahitkambur.tdksozluk.databinding.ItemLayoutProverbBinding
 import com.mucahitkambur.tdksozluk.model.search.Atasozu
 
-class SearchDetailProverbAdapter (
-    private val proverbList: List<Atasozu>
-): RecyclerView.Adapter<SearchDetailProverbViewHolder>() {
+class SearchDetailProverbAdapter (private val proverbClick: (proverb: Atasozu) -> Unit)
+    : RecyclerView.Adapter<SearchDetailProverbViewHolder>() {
+
+    private var proverbList: MutableList<Atasozu> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchDetailProverbViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -20,7 +21,15 @@ class SearchDetailProverbAdapter (
     }
 
     override fun onBindViewHolder(holder: SearchDetailProverbViewHolder, position: Int) {
-        holder.bind(proverbList[position])
+        holder.bind(proverbList[position], proverbClick)
+    }
+
+    fun setProverbs(proverbs: List<Atasozu>?){
+
+        proverbs?.let {
+            proverbList = proverbs.toMutableList()
+            notifyDataSetChanged()
+        }
     }
 
 }
@@ -29,7 +38,12 @@ class SearchDetailProverbViewHolder(
     val binding: ItemLayoutProverbBinding
 ): RecyclerView.ViewHolder(binding.root){
 
-    fun bind(proverb: Atasozu){
+    fun bind(proverb: Atasozu,
+             proverbClick: (proverb: Atasozu) -> Unit){
         binding.proverb = proverb
+        binding.cardViewProverb.setOnClickListener {
+            proverbClick.invoke(proverb)
+        }
+
     }
 }

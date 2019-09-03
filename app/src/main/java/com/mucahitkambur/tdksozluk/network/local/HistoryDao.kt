@@ -11,7 +11,7 @@ interface HistoryDao {
     @JvmSuppressWildcards
     fun insert(history: History)
 
-    @Query("SELECT * FROM table_history")
+    @Query("SELECT * FROM table_history ORDER BY id DESC")
     fun getHistory(): LiveData<List<History>>
 
     @Query("DELETE FROM table_history")

@@ -9,7 +9,7 @@
             type="com.mucahitkambur.tdksozluk.model.main.ContentResult" />
 
         <variable
-            name="mainViewModel"
+            name="viewModel"
             type="com.mucahitkambur.tdksozluk.ui.main.MainViewModel" />
 
         <variable
@@ -64,7 +64,7 @@
                         android:textColor="@android:color/white"
                         android:textSize="36sp"
                         android:tag="parallax=0.9"
-                        android:text="@{content.yabanci.kkelime}" />
+                        android:text="@{content.yabanci.capitalize()}" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:orientation="horizontal"
@@ -258,7 +258,7 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="8dp"
-                                    android:text="@{content.kelime.get(0).madde}"
+                                    android:text="@{content.kelime.get(0).capitalize()}"
                                     android:textColor="@color/blue"
                                     android:textStyle="bold"
                                     app:layout_constraintStart_toStartOf="parent"
@@ -275,8 +275,7 @@
                                     app:layout_constraintStart_toStartOf="@+id/text_one_word"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     android:layout_marginTop="@dimen/spacing_normal"
-                                    android:text="@{content.kelime.get(0).anlam}"
-                                    tools:text="bungalov"/>
+                                    android:text="@{content.kelime.get(0).anlam}"/>
 
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -310,13 +309,12 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="@dimen/spacing_normal"
-                                    android:text="@{content.atasoz.get(0).madde}"
+                                    android:text="@{content.atasoz.get(0).capitalize()}"
                                     android:textColor="@color/blue"
                                     android:textStyle="bold"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintBottom_toTopOf="@+id/text_one_proverb_desc"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    tools:text="bungalov" />
+                                    app:layout_constraintTop_toTopOf="parent" />
 
                                 <TextView
                                     android:id="@+id/text_one_proverb_desc"
@@ -327,8 +325,7 @@
                                     app:layout_constraintStart_toStartOf="@+id/text_one_proverb"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     android:layout_marginTop="@dimen/spacing_normal"
-                                    android:text="@{content.atasoz.get(0).anlam}"
-                                    tools:text="bungalov"/>
+                                    android:text="@{content.atasoz.get(0).anlam}"/>
 
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -351,7 +348,7 @@
                             android:layout_margin="@dimen/margin_medium"
                             android:layout_marginBottom="@dimen/margin_medium"
                             android:foreground="?selectableItemBackground"
-                            android:onClick="@{() -> mainViewModel.startWebview(content.kural.get(0))}"
+                            android:onClick="@{() -> viewModel.startWebview(content.kural.get(0))}"
                             app:cardElevation="5dp"
                             app:cardCornerRadius="10dp">
 
@@ -370,8 +367,7 @@
                                     android:textStyle="bold"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    tools:text="bungalov" />
+                                    app:layout_constraintTop_toTopOf="parent"/>
 
                             </androidx.constraintlayout.widget.ConstraintLayout>
 

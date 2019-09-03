@@ -47,10 +47,13 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         val result = data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
-        findNavController(R.id.fragment_container).navigate(
-            SearchFragmentDirections.actionSearchDetail(
-            result!![0]
-        ))
+
+        result?.let {
+            findNavController(R.id.fragment_container).navigate(
+                SearchFragmentDirections.actionSearchDetail(
+                    it[0]
+                ))
+        }
     }
 
     private fun navController() = findNavController(R.id.fragment_container)

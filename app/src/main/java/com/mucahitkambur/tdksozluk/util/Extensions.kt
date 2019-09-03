@@ -3,10 +3,12 @@ package com.mucahitkambur.tdksozluk.util
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.*
 import androidx.navigation.NavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.mucahitkambur.tdksozluk.R
 import com.tapadoo.alerter.Alerter
 
@@ -45,4 +47,10 @@ fun alphabetPerCharacter(word: String): List<String> {
         characterList.add(character.toString())
 
     return characterList
+}
+
+fun Fragment.divider(): DividerItemDecoration {
+    val itemDecorator = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
+    itemDecorator.setDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.divider)!!)
+    return itemDecorator
 }

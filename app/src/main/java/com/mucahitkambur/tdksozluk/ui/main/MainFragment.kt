@@ -30,8 +30,6 @@ class MainFragment : Fragment(), Injectable {
     @Inject
     lateinit var database: AppDatabase
 
-    private lateinit var layoutManager: LinearLayoutManager
-
     private lateinit var viewModel: MainViewModel
 
     private lateinit var dataBinding: FragmentMainBinding
@@ -48,7 +46,8 @@ class MainFragment : Fragment(), Injectable {
             false
         ).apply {
             lifecycleOwner = this@MainFragment
-            mainViewModel = viewModel
+            viewModel = this@MainFragment.viewModel
+            isVisible = false
         }
         return dataBinding.root
     }
@@ -64,41 +63,37 @@ class MainFragment : Fragment(), Injectable {
 
     private fun initView(){
 
-        card_rule.setOnClickListener{
-
-        }
-
         //SwipeLayout
-        swipe_main.setProgressViewOffset(false, resources.getDimensionPixelSize(R.dimen.refresher_offset),
-            resources.getDimensionPixelSize(R.dimen.refresher_offset_end))
-        swipe_main.setOnRefreshListener { viewModel.mainContent(); }
+        dataBinding.swipeMain.setProgressViewOffset(false, resources.getDimensionPixelSize(R.dimen.refresher_offset), resources.getDimensionPixelSize(R.dimen.refresher_offset_end))
+        dataBinding.swipeMain.setOnRefreshListener { viewModel.mainContent(); }
 
-        layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-
+        //ViewPagers
         val dimensionPadding = resources.getDimensionPixelSize(R.dimen.margin_large)
         val dimensionMargin = resources.getDimensionPixelSize(R.dimen.margin_medium)
-        pager_mixed.setPadding(dimensionPadding / 2, 0, dimensionPadding, 0)
-        pager_mixed.pageMargin = dimensionMargin
-        pager_mistakes.setPadding(dimensionPadding / 2, 0, dimensionPadding, 0)
-        pager_mistakes.pageMargin = dimensionMargin
+        dataBinding.pagerMixed.setPadding(dimensionPadding / 2, 0, dimensionPadding, 0)
+        dataBinding.pagerMixed.pageMargin = dimensionMargin
+        dataBinding.pagerMistakes.setPadding(dimensionPadding / 2, 0, dimensionPadding, 0)
+        dataBinding.pagerMistakes.pageMargin = dimensionMargin
     }
 
     private fun observeMainContent(){
         viewModel.mainContentResult.observe(this, EventObserver {
             if (it.status == Status.SUCCESS){
                 it.data?.let {
+
                     dataBinding.content = it
                     dataBinding.isVisible = true
-                    pager_mixed.adapter = PageAdapter(it.karistirma) {
+
+                    dataBinding.pagerMixed.adapter = PageAdapter(it.karistirma) {
                         startSearchDetail(it)
                     }
-                    pager_mistakes.adapter = PageAdapter(it.syyd) {}
-                    swipe_main.isRefreshing = false
+                    dataBinding.pagerMistakes.adapter = PageAdapter(it.syyd) {
+
+                    }
+
+                    dataBinding.swipeMain.isRefreshing = false
                 }
-            }else if (it.status == Status.LOADING)
-                dataBinding.isVisible = false
-            else if (it.status == Status.ERROR){
-                dataBinding.isVisible = true
+            } else if (it.status == Status.ERROR){
                 showError(it.message?.message)
             }
         })

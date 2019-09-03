@@ -12,7 +12,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.mucahitkambur.tdksozluk.R
 import com.mucahitkambur.tdksozluk.adapter.SearchDetailAlphabetAdapter
-import com.mucahitkambur.tdksozluk.adapter.SearchDetailAnlamlarAdapter
+import com.mucahitkambur.tdksozluk.adapter.SearchDetailMeaningsAdapter
 import com.mucahitkambur.tdksozluk.adapter.SearchDetailProverbAdapter
 import com.mucahitkambur.tdksozluk.databinding.FragmentSearchDetailBinding
 import com.mucahitkambur.tdksozluk.di.Injectable
@@ -30,6 +30,10 @@ class SearchDetailFragment : Fragment(), Injectable {
 
     private lateinit var args: SearchDetailFragmentArgs
 
+    private lateinit var proverbAdapter: SearchDetailProverbAdapter
+
+    private var alphabetAdapter: SearchDetailAlphabetAdapter? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,7 +46,7 @@ class SearchDetailFragment : Fragment(), Injectable {
             container,
             false
         ).apply {
-            word = args.word
+            isVisible = false
 
         }
         return dataBinding.root
@@ -57,27 +61,35 @@ class SearchDetailFragment : Fragment(), Injectable {
 
         observeSearch()
         viewModel.searchWord(args.word)
+
+        proverbAdapter = SearchDetailProverbAdapter({
+            viewModel.searchWord(it.madde)
+        })
+
+        alphabetAdapter = SearchDetailAlphabetAdapter()
+        dataBinding.recycSearchAlphabet.adapter = alphabetAdapter
     }
 
     private fun observeSearch(){
         viewModel.searchResult.observe(this, EventObserver {
             if (it.status == Status.SUCCESS){
                 dataBinding.searchContent = it.data?.get(0)
+
                 val meanList = it.data!![0].anlamlarListe
-                val proverbList = it.data!![0].atasozu
+                val proverbList = it.data[0].atasozu
                 val alphabetList = alphabetPerCharacter(args.word)
 
-                dataBinding.recycSearchMean.adapter = SearchDetailAnlamlarAdapter(meanList)
+                proverbAdapter.setProverbs(proverbList)
+                dataBinding.recycSearchProverb.adapter = proverbAdapter
 
-                if (!proverbList.isNullOrEmpty())
-                    dataBinding.recycSearchProverb.adapter = SearchDetailProverbAdapter(proverbList)
-                dataBinding.recycSearchAlphabet.adapter = SearchDetailAlphabetAdapter(alphabetList)
+                alphabetAdapter?.setAlphabets(alphabetList)
+
+                dataBinding.recycSearchMean.adapter = SearchDetailMeaningsAdapter(meanList)
+
                 dataBinding.isVisible = true
-            }else if (it.status == Status.LOADING)
-                dataBinding.isVisible = false
-            else if (it.status == Status.ERROR){
-                dataBinding.isVisible = true
+            } else if (it.status == Status.ERROR){
                 showError(it.message?.message)
+                startSearch()
             }
         })
     }

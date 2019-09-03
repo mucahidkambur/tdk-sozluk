@@ -8,9 +8,11 @@
     </data>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/card_view_proverb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing_normal">
+        android:layout_margin="@dimen/spacing_normal"
+        android:foreground="?selectableItemBackground">
 
         <TextView
             android:layout_width="wrap_content"

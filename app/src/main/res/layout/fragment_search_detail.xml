@@ -10,10 +10,6 @@
             type="Boolean" />
 
         <variable
-            name="word"
-            type="String" />
-
-        <variable
             name="searchContent"
             type="com.mucahitkambur.tdksozluk.model.search.SearchResult" />
     </data>
@@ -55,8 +51,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_huge"
+                    android:layout_marginEnd="@dimen/margin_huge"
                     visibleInvisible="@{isVisible}"
-                    capitalizeText="@{word}"/>
+                    android:text="@{searchContent.capitalize()}"/>
             </RelativeLayout>
 
             <com.github.captain_miao.optroundcardview.OptRoundCardView
@@ -70,7 +67,8 @@
 
                 <androidx.core.widget.NestedScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:paddingTop="@dimen/spacing_micro">
 
                     <LinearLayout
                     android:layout_width="match_parent"

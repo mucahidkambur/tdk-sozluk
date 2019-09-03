@@ -7,4 +7,6 @@ data class Kelime(
     val madde: String,
     @field:SerializedName("anlam")
     val anlam: String
-)
+){
+    fun capitalize() = madde.capitalize()
+}

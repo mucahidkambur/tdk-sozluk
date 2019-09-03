@@ -1,6 +1,7 @@
 package com.mucahitkambur.tdksozluk.model.main
 
 import com.google.gson.annotations.SerializedName
+import java.util.*
 
 data class Yabanci(
     @field:SerializedName("karsid")
@@ -13,4 +14,6 @@ data class Yabanci(
     val kkarsilik: String,
     @field:SerializedName("anlam")
     val anlam: String
-)
+){
+    fun capitalize() = kkelime.capitalize()
+}

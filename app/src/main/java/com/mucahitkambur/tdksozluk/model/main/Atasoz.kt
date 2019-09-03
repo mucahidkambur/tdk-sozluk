@@ -7,4 +7,6 @@ data class Atasoz(
     val madde: String,
     @field:SerializedName("anlam")
     val anlam: String
-)
+){
+    fun capitalize() = madde.capitalize()
+}

@@ -9,5 +9,6 @@
 
     <color name="blue">#01a4db</color>
     <color name="red">#F2222E</color>
+    <color name="divider">#EEEEEE</color>
     <color name="background">#f3f3f3</color>
 </resources>

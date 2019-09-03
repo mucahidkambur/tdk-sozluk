@@ -12,7 +12,6 @@ import com.mucahitkambur.tdksozluk.repositories.MainRepository
 import com.mucahitkambur.tdksozluk.util.Event
 import com.mucahitkambur.tdksozluk.util.Resource
 import javax.inject.Inject
-import com.mucahitkambur.tdksozluk.util.START_RULE_WEBVIEW
 
 
 class MainViewModel @Inject constructor(

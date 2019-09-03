@@ -4,7 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+            <variable
+                name="viewModel"
+                type="com.mucahitkambur.tdksozluk.ui.search.SearchViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,7 +31,7 @@
             app:layout_constraintRight_toRightOf="parent">
 
                 <com.ferfalk.simplesearchview.SimpleSearchView
-                    android:id="@+id/searchView"
+                    android:id="@+id/view_search"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:layout_margin="@dimen/margin_normal"
@@ -80,7 +82,9 @@
                             android:layout_height="wrap_content"
                             android:padding="@dimen/margin_normal"
                             android:layout_gravity="center_horizontal"
-                            android:text="@string/delete_history"/>
+                            android:text="@string/delete_history"
+                            android:onClick="@{() -> viewModel.deleteHistory()}"
+                            />
                     </LinearLayout>
 
                     <androidx.recyclerview.widget.RecyclerView

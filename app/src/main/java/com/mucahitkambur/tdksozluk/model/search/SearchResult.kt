@@ -48,4 +48,6 @@ data class SearchResult(
 
     @field:SerializedName("error")
     val error: String
-)
+){
+    fun capitalize() = madde.capitalize()
+}

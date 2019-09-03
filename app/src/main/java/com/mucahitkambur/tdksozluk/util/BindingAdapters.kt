@@ -31,13 +31,6 @@ object BindingAdapters {
     }
 
     @JvmStatic
-    @BindingAdapter("capitalizeText")
-    fun capitalizeText(view: TextView, text: String){
-        view.text = text.capitalize()
-    }
-
-
-    @JvmStatic
     @BindingAdapter("htmlToText")
     fun htmlToText(view: TextView, text: String?){
         text?.let {
