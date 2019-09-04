@@ -63,7 +63,6 @@
                         android:layout_marginBottom="@dimen/spacing_normal"
                         android:textColor="@android:color/white"
                         android:textSize="36sp"
-                        android:tag="parallax=0.9"
                         android:text="@{content.yabanci.capitalize()}" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout

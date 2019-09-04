@@ -14,7 +14,14 @@ class SearchAdapter (
     private val suggestionClick: (suggestion: Suggestion) -> Unit
 ): RecyclerView.Adapter<SearchViewHolder>(), Filterable {
 
+    private lateinit var searchRecyclerView: RecyclerView
+
     private var suggestionsFiltered: List<Suggestion> = arrayListOf()
+
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
+        super.onAttachedToRecyclerView(recyclerView)
+        searchRecyclerView = recyclerView
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -49,7 +56,10 @@ class SearchAdapter (
 
             override fun publishResults(p0: CharSequence?, results: FilterResults?) {
                 suggestionsFiltered = results?.values as List<Suggestion>
-                notifyDataSetChanged()
+
+                searchRecyclerView.post {
+                    notifyDataSetChanged()
+                }
             }
 
         }

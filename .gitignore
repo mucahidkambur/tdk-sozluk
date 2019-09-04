@@ -12,3 +12,8 @@
 /captures
 .externalNativeBuild
 .cxx
+keystore.properties
+google-services.json
+/app/crashlytics.properties
+/key
+/app/production

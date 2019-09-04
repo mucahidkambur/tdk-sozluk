@@ -8,7 +8,6 @@ import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.mucahitkambur.tdksozluk.BuildConfig
 import com.mucahitkambur.tdksozluk.R
-import kotlinx.android.synthetic.main.fragment_search_detail.view.*
 
 object BindingAdapters {
 
