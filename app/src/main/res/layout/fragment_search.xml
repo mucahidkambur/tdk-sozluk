@@ -68,7 +68,8 @@
                         android:id="@+id/linear_history"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="gone">
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recyc_history"
@@ -83,10 +84,7 @@
                             android:padding="@dimen/margin_normal"
                             android:layout_gravity="center_horizontal"
                             android:text="@string/delete_history"
-                            android:onClick="@{() -> viewModel.deleteHistory()}"
-                            android:visibility="gone"
-                            visibleGone="@{viewModel.historyDbResult().empty ? false : true}"
-                            />
+                            android:onClick="@{() -> viewModel.deleteHistory()}"/>
                     </LinearLayout>
 
                     <androidx.recyclerview.widget.RecyclerView

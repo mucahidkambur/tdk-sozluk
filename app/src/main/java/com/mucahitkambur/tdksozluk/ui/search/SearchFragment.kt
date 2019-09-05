@@ -70,6 +70,7 @@ class SearchFragment : Fragment(), Injectable {
         dataBinding.viewSearch.visibility = View.VISIBLE
 
         searchAdapter = SearchAdapter() {
+            hideKeyboard()
             startSearchDetail(it.madde)
         }
         dataBinding.recycSuggestion.adapter = searchAdapter
