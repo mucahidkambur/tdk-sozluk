@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import com.mucahitkambur.tdksozluk.model.search.History
 import com.mucahitkambur.tdksozluk.model.search.SearchResult
+import com.mucahitkambur.tdksozluk.model.search.Suggestion
 import com.mucahitkambur.tdksozluk.network.api.*
 import com.mucahitkambur.tdksozluk.network.api.ApiException
 import com.mucahitkambur.tdksozluk.network.local.AppDatabase
@@ -58,7 +59,11 @@ class SearchRepository @Inject constructor(
         return database.historyDao().getHistory()
     }
 
-    fun deleteHistory(){
+    fun getSuggestionFromDb(word: String?): LiveData<List<Suggestion>> {
+        return database.suggestionDao().getSuggestions(word)
+    }
+
+    fun deleteSearchHistory(){
         appExecutors.diskIO().execute{
             database.historyDao().deleteAll()
         }

@@ -10,19 +10,11 @@ import com.mucahitkambur.tdksozluk.model.search.Suggestion
 import java.util.*
 
 class SearchAdapter (
-    private val suggestions: List<Suggestion>,
     private val suggestionClick: (suggestion: Suggestion) -> Unit
-): RecyclerView.Adapter<SearchViewHolder>(), Filterable {
-
-    private lateinit var searchRecyclerView: RecyclerView
+): RecyclerView.Adapter<SearchViewHolder>() {
 
     private var suggestionsFiltered: List<Suggestion> = arrayListOf()
-
-    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
-        super.onAttachedToRecyclerView(recyclerView)
-        searchRecyclerView = recyclerView
-    }
-
+    
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         return SearchViewHolder(ItemSearchBinding.inflate(inflater, parent, false))
@@ -36,32 +28,10 @@ class SearchAdapter (
         holder.bind(suggestionsFiltered[position], suggestionClick)
     }
 
-    override fun getFilter(): Filter {
-        return object: Filter(){
-            override fun performFiltering(text: CharSequence?): FilterResults {
-                val filteredList = mutableListOf<Suggestion>()
-                for (suggestion in suggestions){
-                    if (suggestion.madde.startsWith(text.toString().toLowerCase(Locale.getDefault()), true) &&
-                            filteredList.size < 11){
-                        filteredList.add(suggestion)
-                    }
-                }
-
-                suggestionsFiltered = filteredList
-
-                val filterResult = FilterResults()
-                filterResult.values = suggestionsFiltered
-                return filterResult
-            }
-
-            override fun publishResults(p0: CharSequence?, results: FilterResults?) {
-                suggestionsFiltered = results?.values as List<Suggestion>
-
-                searchRecyclerView.post {
-                    notifyDataSetChanged()
-                }
-            }
-
+    fun setSuggestions(sugggestionList: List<Suggestion>?){
+        sugggestionList?.let {
+            suggestionsFiltered = sugggestionList
+            notifyDataSetChanged()
         }
     }
 }

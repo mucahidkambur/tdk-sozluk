@@ -32,10 +32,6 @@ class MainViewModel @Inject constructor(
         return repository.suggestionsContent()
     }
 
-    fun suggestionsDbResult() : LiveData<List<Suggestion>> {
-        return repository.getSuggestionsFromDb()
-    }
-
     fun webviewResult() : MutableLiveData<Url> {
         return _click
     }

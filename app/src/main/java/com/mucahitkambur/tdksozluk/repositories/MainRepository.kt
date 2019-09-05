@@ -57,8 +57,4 @@ class MainRepository @Inject constructor(
     fun insertSuggestionToDb(){
         database.suggestionDao().insert(suggestionsContent.value?.peekContent()?.data)
     }
-
-    fun getSuggestionsFromDb(): LiveData<List<Suggestion>>{
-        return database.suggestionDao().getSuggestions()
-    }
 }

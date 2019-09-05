@@ -84,6 +84,8 @@
                             android:layout_gravity="center_horizontal"
                             android:text="@string/delete_history"
                             android:onClick="@{() -> viewModel.deleteHistory()}"
+                            android:visibility="gone"
+                            visibleGone="@{viewModel.historyDbResult().empty ? false : true}"
                             />
                     </LinearLayout>
 

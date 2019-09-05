@@ -16,11 +16,9 @@ import com.mucahitkambur.tdksozluk.adapter.HistoryAdapter
 import com.mucahitkambur.tdksozluk.adapter.SearchAdapter
 import com.mucahitkambur.tdksozluk.databinding.FragmentSearchBinding
 import com.mucahitkambur.tdksozluk.di.Injectable
-import com.mucahitkambur.tdksozluk.model.search.SuggestionSingleton
 import com.mucahitkambur.tdksozluk.network.local.AppDatabase
 import javax.inject.Inject
-import android.content.Intent
-import android.speech.RecognizerIntent
+import com.mucahitkambur.tdksozluk.model.search.Suggestion
 import com.mucahitkambur.tdksozluk.util.*
 
 
@@ -35,14 +33,13 @@ class SearchFragment : Fragment(), Injectable {
     @Inject
     lateinit var database: AppDatabase
 
-    @Inject
-    lateinit var suggestionSingleton: SuggestionSingleton
-
-    private var searchAdapter: SearchAdapter? = null
+    private lateinit var searchAdapter: SearchAdapter
 
     private lateinit var viewModel: SearchViewModel
 
     private lateinit var dataBinding: FragmentSearchBinding
+
+    private var searchSuggestion: List<Suggestion>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -66,12 +63,13 @@ class SearchFragment : Fragment(), Injectable {
 
         initView()
         observeHistory()
+        observeSuggestions()
     }
 
     private fun initView(){
         dataBinding.viewSearch.visibility = View.VISIBLE
 
-        searchAdapter = SearchAdapter(suggestionSingleton.suggestions!!) {
+        searchAdapter = SearchAdapter() {
             startSearchDetail(it.madde)
         }
         dataBinding.recycSuggestion.adapter = searchAdapter
@@ -84,7 +82,7 @@ class SearchFragment : Fragment(), Injectable {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                searchAdapter?.filter?.filter(newText)
+                viewModel.suggestionWord(newText)
                 dataBinding.recycSuggestion.visibility = View.VISIBLE
                 dataBinding.linearHistory.visibility = View.GONE
                 return false
@@ -106,6 +104,12 @@ class SearchFragment : Fragment(), Injectable {
             dataBinding.recycHistory.adapter = HistoryAdapter(it, historyClick = {
                 startSearchDetail(it.word)
             })
+        })
+    }
+
+    private fun observeSuggestions(){
+        viewModel.suggestionsDbResult.observe(this, Observer {
+            searchAdapter.setSuggestions(it)
         })
     }
 }

@@ -48,6 +48,9 @@ android {
             ext.enableCrashytics = false
             signingConfig signingConfigs.debug
         }
+        release {
+            signingConfig signingConfigs.release
+        }
     }
 
     flavorDimensions "version"
