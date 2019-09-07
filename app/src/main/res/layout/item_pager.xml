@@ -58,7 +58,7 @@
                             android:padding="@dimen/margin_medium"
                             android:maxLines="4"
                             android:foreground="?selectableItemBackground"
-                            tools:text="araba"/>
+                            tools:text="candarma, cenderme"/>
 
                     </RelativeLayout>
                 </LinearLayout>
@@ -91,7 +91,8 @@
                             android:text="@{mixed.dogru}"
                             android:padding="@dimen/margin_medium"
                             android:maxLines="4"
-                            android:foreground="?selectableItemBackground"/>
+                            android:foreground="?selectableItemBackground"
+                            tools:text="jandarma"/>
 
                     </RelativeLayout>
                 </LinearLayout>

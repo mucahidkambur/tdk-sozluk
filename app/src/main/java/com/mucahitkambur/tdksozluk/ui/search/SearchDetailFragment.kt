@@ -73,11 +73,14 @@ class SearchDetailFragment : Fragment(), Injectable {
     private fun observeSearch(){
         viewModel.searchResult.observe(this, EventObserver {
             if (it.status == Status.SUCCESS){
-                dataBinding.searchContent = it.data?.get(0)
 
-                val meanList = it.data!![0].anlamlarListe
-                val proverbList = it.data[0].atasozu
-                val alphabetList = alphabetPerCharacter(args.word)
+                val content = it.data?.get(0)
+
+                dataBinding.searchContent = content
+
+                val meanList = content!!.anlamlarListe
+                val proverbList = content.atasozu
+                val alphabetList = alphabetPerCharacter(content.madde)
 
                 proverbAdapter.setProverbs(proverbList)
                 dataBinding.recycSearchProverb.adapter = proverbAdapter
