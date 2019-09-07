@@ -24,6 +24,9 @@ class SearchDetailFragment : Fragment(), Injectable {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
+    @Inject
+    lateinit var preferenceStorage: PreferenceStorage
+
     private lateinit var viewModel: SearchViewModel
 
     private lateinit var dataBinding: FragmentSearchDetailBinding
@@ -55,6 +58,8 @@ class SearchDetailFragment : Fragment(), Injectable {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        addCounter()
+
         dataBinding.toolbarCommon.setOnClickListener{
             findNavController().navigate(SearchDetailFragmentDirections.actionNavSearchDetailToNavSearch())
         }
@@ -64,10 +69,16 @@ class SearchDetailFragment : Fragment(), Injectable {
 
         proverbAdapter = SearchDetailProverbAdapter({
             viewModel.searchWord(it.madde)
+            addCounter()
         })
 
         alphabetAdapter = SearchDetailAlphabetAdapter()
         dataBinding.recycSearchAlphabet.adapter = alphabetAdapter
+    }
+
+    private fun addCounter(){
+        val addCounter = preferenceStorage.searchCount
+        preferenceStorage.searchCount = addCounter + 1
     }
 
     private fun observeSearch(){

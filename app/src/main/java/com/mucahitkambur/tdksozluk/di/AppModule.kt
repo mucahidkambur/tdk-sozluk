@@ -9,6 +9,8 @@ import com.mucahitkambur.tdksozluk.network.api.ApiService
 import com.mucahitkambur.tdksozluk.network.local.AppDatabase
 import com.mucahitkambur.tdksozluk.network.local.SuggestionDao
 import com.mucahitkambur.tdksozluk.util.LiveDataCallAdapterFactory
+import com.mucahitkambur.tdksozluk.util.PreferenceStorage
+import com.mucahitkambur.tdksozluk.util.SharedPreferenceStorage
 import com.mucahitkambur.tdksozluk.util.hasNetwork
 import dagger.Module
 import dagger.Provides
@@ -99,5 +101,10 @@ class AppModule {
             .build()
             .create(ApiService::class.java)
     }
+
+    @Singleton
+    @Provides
+    fun providesPreferenceStorage(context: Context): PreferenceStorage =
+        SharedPreferenceStorage(context)
 
 }

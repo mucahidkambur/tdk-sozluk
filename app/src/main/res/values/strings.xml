@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">TDK Sözlük</string>
     <string name="search_hint">Kelime ara</string>
     <string name="word_of_day">Günün kelimesi</string>
     <string name="word_origin">Köken</string>

@@ -24,12 +24,6 @@ class MainFragment : Fragment(), Injectable {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    @Inject
-    lateinit var appExecutors: AppExecutors
-
-    @Inject
-    lateinit var database: AppDatabase
-
     private lateinit var viewModel: MainViewModel
 
     private lateinit var dataBinding: FragmentMainBinding
