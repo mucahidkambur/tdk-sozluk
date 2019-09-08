@@ -19,29 +19,89 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.20"/>
+            app:layout_constraintGuide_percent="0.22"/>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:background="@color/blue"
+        <com.ferfalk.simplesearchview.SimpleSearchView
+            android:id="@+id/view_search"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="@dimen/margin_normal"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:layout_marginEnd="@dimen/margin_normal"
+            app:layout_constraintBottom_toTopOf="@+id/card_capped"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:background="@color/blue"
+            app:searchBackIcon="@drawable/ic_search"
+            app:type="card"
+            app:voiceSearch="true" />
+
+        <LinearLayout
+            android:id="@+id/card_capped"
+            android:layout_width="0dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="@dimen/margin_normal"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/spacing_micro"
+            android:layout_marginBottom="@dimen/spacing_normal"
             app:layout_constraintBottom_toTopOf="@+id/layout_guidline"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent">
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_search">
 
-                <com.ferfalk.simplesearchview.SimpleSearchView
-                    android:id="@+id/view_search"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_margin="@dimen/margin_normal"
-                    android:layout_centerVertical="true"
-                    app:voiceSearch="true"
-                    app:type="card"
-                    app:searchBackIcon="@drawable/ic_search"
-                    android:background="@color/blue" />
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_capped_a"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_margin="@dimen/spacing_micro"
+                android:foreground="?selectableItemBackground"
+                app:cardCornerRadius="4dp"
+                app:cardElevation="2dp">
 
-        </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:text="@string/capped_a" />
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_capped_i"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_margin="@dimen/spacing_micro"
+                android:foreground="?selectableItemBackground"
+                app:cardCornerRadius="4dp"
+                app:cardElevation="2dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:text="@string/capped_i" />
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_capped_u"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_margin="@dimen/spacing_micro"
+                android:foreground="?selectableItemBackground"
+                app:cardCornerRadius="4dp"
+                app:cardElevation="2dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:text="@string/capped_u" />
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
 
         <com.github.captain_miao.optroundcardview.OptRoundCardView
             android:layout_width="match_parent"

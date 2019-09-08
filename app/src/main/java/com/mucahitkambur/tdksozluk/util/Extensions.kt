@@ -49,8 +49,14 @@ fun alphabetPerCharacter(word: String): List<String> {
 
     val characterList: MutableList<String> = arrayListOf()
 
-    for (character in word)
-        characterList.add(character.toString())
+    for (character in word){
+        when(character.toString()){
+            "â" -> characterList.add("a")
+            "î" -> characterList.add("î")
+            "û" -> characterList.add("û")
+            else -> characterList.add(character.toString())
+        }
+    }
 
     return characterList
 }

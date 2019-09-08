@@ -11,6 +11,10 @@
     <string name="one_rule">Bir Kural Öğren</string>
     <string name="about">Hakkımızda</string>
 
+    <string name="capped_a">â</string>
+    <string name="capped_i">î</string>
+    <string name="capped_u">û</string>
+
     <string name="colon">:</string>
     <string name="dash">-</string>
     <string name="dot">.</string>

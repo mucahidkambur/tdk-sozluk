@@ -69,6 +69,18 @@ class SearchFragment : Fragment(), Injectable {
     private fun initView(){
         dataBinding.viewSearch.visibility = View.VISIBLE
 
+        dataBinding.cardCappedA.setOnClickListener {
+            dataBinding.viewSearch.searchEditText.text.append(resources.getString(R.string.capped_a))
+        }
+
+        dataBinding.cardCappedI.setOnClickListener {
+            dataBinding.viewSearch.searchEditText.text.append(resources.getString(R.string.capped_i))
+        }
+
+        dataBinding.cardCappedU.setOnClickListener {
+            dataBinding.viewSearch.searchEditText.text.append(resources.getString(R.string.capped_u))
+        }
+
         searchAdapter = SearchAdapter() {
             hideKeyboard()
             startSearchDetail(it.madde)
