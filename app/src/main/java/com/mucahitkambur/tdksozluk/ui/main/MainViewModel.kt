@@ -19,7 +19,8 @@ class MainViewModel @Inject constructor(
 ): ViewModel() {
 
     private val _mainContent = MutableLiveData<Event<Unit>>()
-    private val _click = MutableLiveData<Url>()
+    private val _webViewClick = MutableLiveData<Url>()
+    private val _textClick = MutableLiveData<String>()
 
     val mainContentResult: LiveData<Event<Resource<ContentResult>>> = Transformations
         .switchMap(_mainContent){ repository.mainContent() }
@@ -33,10 +34,18 @@ class MainViewModel @Inject constructor(
     }
 
     fun webviewResult() : MutableLiveData<Url> {
-        return _click
+        return _webViewClick
     }
 
     fun startWebview(url: Kural){
-        _click.value = Url(url.url, url.adi)
+        _webViewClick.value = Url(url.url, url.adi)
+    }
+
+    fun textClickResult(): MutableLiveData<String> {
+        return _textClick
+    }
+
+    fun textClick(text: String){
+        _textClick.value = text
     }
 }

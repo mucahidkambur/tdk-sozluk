@@ -1,11 +1,14 @@
 package com.mucahitkambur.tdksozluk.util
 
 import android.app.Activity
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -66,4 +69,13 @@ fun Fragment.hideKeyboard(){
         view = View(activity)
 
     imm.hideSoftInputFromWindow(view.windowToken, 0)
+}
+
+fun Fragment.clipToBoard(text: String?){
+
+    val clipboard = activity?.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+    val myClip = ClipData.newPlainText("text", text);
+    clipboard.setPrimaryClip(myClip)
+
+    Toast.makeText(context, "Kopyalandı", Toast.LENGTH_SHORT).show();
 }

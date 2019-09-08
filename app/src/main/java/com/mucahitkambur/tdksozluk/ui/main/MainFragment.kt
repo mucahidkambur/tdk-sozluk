@@ -53,6 +53,7 @@ class MainFragment : Fragment(), Injectable {
         viewModel.mainContent()
         observeMainContent()
         observeWebView()
+        observeTextClick()
     }
 
     private fun initView(){
@@ -96,6 +97,12 @@ class MainFragment : Fragment(), Injectable {
     private fun observeWebView(){
         viewModel.webviewResult().observe(this, Observer {
             startWebView(it)
+        })
+    }
+
+    private fun observeTextClick(){
+        viewModel.textClickResult().observe(this, Observer {
+            clipToBoard(it)
         })
     }
 }
