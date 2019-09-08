@@ -52,13 +52,14 @@
                             android:id="@+id/text_false"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
+                            android:layout_centerHorizontal="true"
                             android:layout_toEndOf="@+id/img_false"
-                            android:text="@{mixed.yanlis}"
-                            android:gravity="center_vertical"
-                            android:padding="@dimen/margin_medium"
-                            android:maxLines="4"
                             android:foreground="?selectableItemBackground"
-                            tools:text="candarma, cenderme"/>
+                            android:gravity="center_horizontal|center_vertical"
+                            android:maxLines="4"
+                            android:padding="@dimen/margin_medium"
+                            android:text="@{mixed.yanlis}"
+                            tools:text="candarma, cenderme" />
 
                     </RelativeLayout>
                 </LinearLayout>

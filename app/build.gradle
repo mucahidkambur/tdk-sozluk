@@ -72,6 +72,7 @@ android {
         production {
             dimension "version"
 
+            resValue "string", "app_name", "TDK Sözlük"
             buildConfigField "String", "END_POINT", "\"${end_point}\""
             buildConfigField "String", "GITHUB_URL", "\"${github_url}\""
             buildConfigField "String", "MAIL_ADDRESS", "\"${mail_address}\""
