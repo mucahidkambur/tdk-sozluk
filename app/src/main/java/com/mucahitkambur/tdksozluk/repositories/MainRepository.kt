@@ -55,6 +55,8 @@ class MainRepository @Inject constructor(
     }
 
     fun insertSuggestionToDb(){
-        database.suggestionDao().insert(suggestionsContent.value?.peekContent()?.data)
+        appExecutors.diskIO().execute {
+            database.suggestionDao().insert(suggestionsContent.value?.peekContent()?.data)
+        }
     }
 }
