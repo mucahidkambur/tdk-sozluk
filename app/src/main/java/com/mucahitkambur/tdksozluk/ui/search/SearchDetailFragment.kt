@@ -67,10 +67,10 @@ class SearchDetailFragment : Fragment(), Injectable {
         observeSearch()
         viewModel.searchWord(args.word)
 
-        proverbAdapter = SearchDetailProverbAdapter({
+        proverbAdapter = SearchDetailProverbAdapter {
             viewModel.searchWord(it.madde)
             addCounter()
-        })
+        }
 
         alphabetAdapter = SearchDetailAlphabetAdapter()
         dataBinding.recycSearchAlphabet.adapter = alphabetAdapter

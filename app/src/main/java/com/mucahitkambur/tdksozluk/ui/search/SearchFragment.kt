@@ -91,7 +91,11 @@ class SearchFragment : Fragment(), Injectable {
 
         dataBinding.viewSearch.setOnQueryTextListener(object: SimpleSearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
-                return false
+                query?.let {
+                    hideKeyboard()
+                    startSearchDetail(it)
+                }
+                return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
