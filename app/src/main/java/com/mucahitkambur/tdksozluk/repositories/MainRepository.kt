@@ -44,7 +44,7 @@ class MainRepository @Inject constructor(
             when(val apiResponse = ApiResponse.create(response)){
                 is ApiSuccessResponse -> {
                     suggestionsContent.postValue(Event(Resource.success(apiResponse.body)))
-                    insertSuggestionToDb()
+                    insertSuggestionToDb(apiResponse.body)
                 }
                 is ApiErrorResponse -> {
                     suggestionsContent.postValue(Event(Resource.error(apiResponse.errorMessage, null)))
@@ -54,9 +54,9 @@ class MainRepository @Inject constructor(
         return suggestionsContent
     }
 
-    fun insertSuggestionToDb(){
+    fun insertSuggestionToDb(suggestions: List<Suggestion>) {
         appExecutors.diskIO().execute {
-            database.suggestionDao().insert(suggestionsContent.value?.peekContent()?.data)
+            database.suggestionDao().insert(suggestions)
         }
     }
 }
