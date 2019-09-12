@@ -3,7 +3,7 @@
     <img src="resimler/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">TDK Sözlük 1.0.1</h3>
+  <h3 align="center">TDK Sözlük 1.0.2</h3>
 
   <p align="center">
     TDK Sözlük uygulaması, TDK'nın verilerini kullanarak güncel Android teknolojileri ile geliştirilen açık kaynak bir sözlük uygulamasıdır.
