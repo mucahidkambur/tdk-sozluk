@@ -13,36 +13,36 @@ object BindingAdapters {
 
     @JvmStatic
     @BindingAdapter("visibleInvisible")
-    fun visibleInvisible(view: View, isVisible: Boolean){
-        if (isVisible)
-            view.visibility = View.VISIBLE
+    fun View.visibleInvisible(isVisible: Boolean) {
+        visibility = if (isVisible)
+            View.VISIBLE
         else
-            view.visibility  = View.INVISIBLE
+            View.INVISIBLE
     }
 
     @JvmStatic
     @BindingAdapter("visibleGone")
-    fun visibleGone(view: View, isVisible: Boolean){
-        if (isVisible)
-            view.visibility = View.VISIBLE
+    fun View.visibleGone(isVisible: Boolean) {
+        visibility = if (isVisible)
+            View.VISIBLE
         else
-            view.visibility  = View.GONE
+            View.GONE
     }
 
     @JvmStatic
     @BindingAdapter("htmlToText")
-    fun htmlToText(view: TextView, text: String?){
+    fun TextView.htmlToText(text: String?) {
         text?.let {
-            view.text = HtmlCompat.fromHtml(text, HtmlCompat.FROM_HTML_MODE_LEGACY);
+            setText(HtmlCompat.fromHtml(it, HtmlCompat.FROM_HTML_MODE_LEGACY))
         }
     }
 
     @JvmStatic
     @BindingAdapter("alphabetImage")
-    fun alphabetImage(view: ImageView, text: String?){
+    fun ImageView.alphabetImage(text: String?) {
         val url = view.context.getString(R.string.alphabet_ext, BuildConfig.ALPHABET_IMG_URL, text)
-        Glide.with(view.context)
+        Glide.with(context)
             .load(url)
-            .into(view)
+            .into(this)
     }
 }
