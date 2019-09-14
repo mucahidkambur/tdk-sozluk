@@ -40,7 +40,7 @@ object BindingAdapters {
     @JvmStatic
     @BindingAdapter("alphabetImage")
     fun ImageView.alphabetImage(text: String?) {
-        val url = view.context.getString(R.string.alphabet_ext, BuildConfig.ALPHABET_IMG_URL, text)
+        val url = this.context.getString(R.string.alphabet_ext, BuildConfig.ALPHABET_IMG_URL, text)
         Glide.with(context)
             .load(url)
             .into(this)
