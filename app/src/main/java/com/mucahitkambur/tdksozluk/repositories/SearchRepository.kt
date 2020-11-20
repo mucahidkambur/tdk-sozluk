@@ -11,7 +11,6 @@ import com.mucahitkambur.tdksozluk.network.local.AppDatabase
 import com.mucahitkambur.tdksozluk.util.AppExecutors
 import com.mucahitkambur.tdksozluk.util.Event
 import com.mucahitkambur.tdksozluk.util.Resource
-import java.io.IOException
 import java.lang.Exception
 import javax.inject.Inject
 
@@ -61,6 +60,12 @@ class SearchRepository @Inject constructor(
 
     fun getSuggestionFromDb(word: String?): LiveData<List<Suggestion>> {
         return database.suggestionDao().getSuggestions(word)
+    }
+
+    fun deleteHistoryById(id: Int) {
+        appExecutors.diskIO().execute{
+            database.historyDao().deleteHistoryById(id)
+        }
     }
 
     fun deleteSearchHistory(){

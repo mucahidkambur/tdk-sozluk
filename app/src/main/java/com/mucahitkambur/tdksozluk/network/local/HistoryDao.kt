@@ -16,4 +16,7 @@ interface HistoryDao {
 
     @Query("DELETE FROM table_history")
     fun deleteAll()
+
+    @Query("DELETE FROM table_history WHERE id = :id")
+    fun deleteHistoryById(id: Int)
 }

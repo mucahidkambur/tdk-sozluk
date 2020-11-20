@@ -37,6 +37,10 @@ class SearchViewModel @Inject constructor(
         return repository.getHistoryFromDb()
     }
 
+    fun deleteHistoryById(id: Int) {
+        repository.deleteHistoryById(id)
+    }
+
     fun deleteHistory(){
         repository.deleteSearchHistory()
     }

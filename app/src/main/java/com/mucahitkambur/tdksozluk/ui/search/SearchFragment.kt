@@ -82,7 +82,8 @@ class SearchFragment : Fragment(), Injectable {
             dataBinding.viewSearch.searchEditText.text.append(resources.getString(R.string.capped_u))
         }
 
-        searchAdapter = SearchAdapter() {
+        searchAdapter = SearchAdapter()
+        searchAdapter.suggestionClick = {
             hideKeyboard()
             startSearchDetail(it.madde)
         }
@@ -119,9 +120,14 @@ class SearchFragment : Fragment(), Injectable {
             }else
                 dataBinding.linearHistory.visibility = View.GONE
 
-            dataBinding.recycHistory.adapter = HistoryAdapter(it, historyClick = {
+            val historyAdapter = HistoryAdapter(it)
+            historyAdapter.historyClick = {
                 startSearchDetail(it.word)
-            })
+            }
+            historyAdapter.deleteClick = {
+                viewModel.deleteHistoryById(it.id)
+            }
+            dataBinding.recycHistory.adapter = historyAdapter
         })
     }
 

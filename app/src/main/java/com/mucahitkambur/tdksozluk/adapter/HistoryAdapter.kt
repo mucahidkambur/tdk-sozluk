@@ -7,9 +7,11 @@ import com.mucahitkambur.tdksozluk.databinding.ItemLayoutHistoryBinding
 import com.mucahitkambur.tdksozluk.model.search.History
 
 class HistoryAdapter (
-    private val historyList: List<History>,
-    private val historyClick: (history: History) -> Unit
+    private val historyList: List<History>
 ): RecyclerView.Adapter<SearchHistoryViewHolder>() {
+
+    var historyClick: ((History) -> Unit)? = null
+    var deleteClick: ((History) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchHistoryViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -21,18 +23,21 @@ class HistoryAdapter (
     }
 
     override fun onBindViewHolder(holder: SearchHistoryViewHolder, position: Int) {
-        holder.bind(historyList[position], historyClick)
+        holder.bind(historyList[position], historyClick, deleteClick)
     }
 
 }
 
-class SearchHistoryViewHolder(
-    val binding: ItemLayoutHistoryBinding
-): RecyclerView.ViewHolder(binding.root){
+class SearchHistoryViewHolder(val binding: ItemLayoutHistoryBinding): RecyclerView.ViewHolder(binding.root){
 
-    fun bind(history: History,
-             historyClick: (history: History) -> Unit){
+    fun bind(
+        history: History,
+        historyClick: ((history: History) -> Unit)?,
+        deleteClick: ((history: History) -> Unit)?
+    ){
         binding.history = history.word
-        binding.relativeHistory.setOnClickListener { historyClick.invoke(history) }
+        binding.root.setOnClickListener { historyClick?.invoke(history) }
+        binding.imgDelete.setOnClickListener { deleteClick?.invoke(history) }
+        binding.executePendingBindings()
     }
 }

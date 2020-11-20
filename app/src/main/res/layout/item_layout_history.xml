@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -8,8 +9,7 @@
             type="String" />
     </data>
 
-    <RelativeLayout
-        android:id="@+id/relative_history"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/margin_normal">
@@ -18,14 +18,31 @@
             android:id="@+id/text_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{history}"/>
+            android:text="@{history}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Araba" />
 
         <ImageView
-            android:id="@+id/img_search"
+            android:id="@+id/img_delete"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_alignParentEnd="true"
-            app:srcCompat="@drawable/ic_history"/>
+            app:srcCompat="@drawable/ic_delete"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </RelativeLayout>
+        <ImageView
+            android:id="@+id/ic_history"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="@dimen/margin_medium"
+            android:layout_alignParentEnd="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/img_delete"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_history" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
