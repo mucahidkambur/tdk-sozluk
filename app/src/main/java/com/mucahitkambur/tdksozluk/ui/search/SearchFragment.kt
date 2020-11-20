@@ -67,6 +67,7 @@ class SearchFragment : Fragment(), Injectable {
     }
 
     private fun initView(){
+        dataBinding.viewSearch.searchEditText.showKeyboard()
         dataBinding.viewSearch.visibility = View.VISIBLE
 
         dataBinding.cardCappedA.setOnClickListener {

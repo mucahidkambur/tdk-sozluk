@@ -85,3 +85,9 @@ fun Fragment.clipToBoard(text: String?){
 
     Toast.makeText(context, "Kopyalandı", Toast.LENGTH_SHORT).show();
 }
+
+fun View.showKeyboard() {
+    val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    this.requestFocus()
+    imm.showSoftInput(this, 0)
+}
