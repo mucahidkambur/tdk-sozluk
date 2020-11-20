@@ -11,6 +11,7 @@ import com.mucahitkambur.tdksozluk.ui.search.SearchFragmentDirections
 
 fun FragmentActivity.startHomeActivity(){
     startActivity(MainActivity.newIntent(this))
+    finish()
 }
 
 fun Fragment.startWebView(url: Url){
