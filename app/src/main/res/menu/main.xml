@@ -15,8 +15,8 @@
         app:contentDescription="@string/search_hint" />
 
     <item
-        android:id="@+id/nav_about"
-        android:title="@string/about"
-        android:icon="@drawable/ic_about"
-        app:contentDescription="@string/about" />
+        android:id="@+id/nav_favorites"
+        android:title="@string/favorites"
+        android:icon="@drawable/ic_favorites"
+        app:contentDescription="@string/favorites" />
 </menu>

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import com.mucahitkambur.tdksozluk.model.favorites.Favorite
 import com.mucahitkambur.tdksozluk.model.search.History
 import com.mucahitkambur.tdksozluk.model.search.SearchResult
 import com.mucahitkambur.tdksozluk.model.search.Suggestion
@@ -43,5 +44,17 @@ class SearchViewModel @Inject constructor(
 
     fun deleteHistory(){
         repository.deleteSearchHistory()
+    }
+
+    fun addFavorite(favorite: Favorite) {
+        repository.addFavoriteToFavoritesDb(favorite)
+    }
+
+    fun getFavoriteByWord(word: String): LiveData<Favorite> {
+        return repository.getFavoriteFromFavoritesDb(word)
+    }
+
+    fun deleteFavoriteByWord(word: String) {
+        repository.deleteFavoriteByWord(word)
     }
 }

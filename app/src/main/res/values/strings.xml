@@ -10,6 +10,7 @@
     <string name="one_proverb">Bir Atasözü - Deyim</string>
     <string name="one_rule">Bir Kural Öğren</string>
     <string name="about">Hakkımızda</string>
+    <string name="favorites">Favoriler</string>
 
     <string name="capped_a">â</string>
     <string name="capped_i">î</string>
@@ -24,6 +25,7 @@
     <string name="finger_alphabet">Parmak Alfabesi</string>
     <string name="delete_history">Tüm Geçmişi Sil</string>
     <string name="sifat">sıfat</string>
+    <string name="empty_favorite">Favori kelimeniz bulunmuyor. Kelime detayından kelimeyi favoriye ekleyebilirsin.</string>
 
     <string name="alphabet_ext">%1$s%2$s.gif</string>
     <string name="version">Versiyon: %s</string>
@@ -31,5 +33,5 @@
         uygulamasıdır. Projeye katkıda bulunmak veya kaynak kodlarını incelemek için %2s adresine
         gidebilirsiniz. \n\n Uygulama için geri bildirim göndermek
         isterseniz de %3s adresine mail atabilirsiniz.</string>
-    
+
 </resources>

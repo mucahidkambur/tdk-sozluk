@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.mucahitkambur.tdksozluk.R
 import com.mucahitkambur.tdksozluk.adapter.SearchDetailAlphabetAdapter
@@ -16,6 +17,7 @@ import com.mucahitkambur.tdksozluk.adapter.SearchDetailMeaningsAdapter
 import com.mucahitkambur.tdksozluk.adapter.SearchDetailProverbAdapter
 import com.mucahitkambur.tdksozluk.databinding.FragmentSearchDetailBinding
 import com.mucahitkambur.tdksozluk.di.Injectable
+import com.mucahitkambur.tdksozluk.model.favorites.Favorite
 import com.mucahitkambur.tdksozluk.util.*
 import javax.inject.Inject
 
@@ -42,15 +44,15 @@ class SearchDetailFragment : Fragment(), Injectable {
         savedInstanceState: Bundle?
     ): View? {
         viewModel = viewModelProvider(viewModelFactory)
-        args = SearchDetailFragmentArgs.fromBundle(arguments!!)
+        args = SearchDetailFragmentArgs.fromBundle(requireArguments())
         dataBinding = DataBindingUtil.inflate<FragmentSearchDetailBinding>(
             inflater,
             R.layout.fragment_search_detail,
             container,
             false
         ).apply {
+            viewModel = this@SearchDetailFragment.viewModel
             isVisible = false
-
         }
         return dataBinding.root
     }
@@ -62,6 +64,14 @@ class SearchDetailFragment : Fragment(), Injectable {
 
         dataBinding.toolbarCommon.setOnClickListener{
             findNavController().navigate(SearchDetailFragmentDirections.actionNavSearchDetailToNavSearch())
+        }
+
+        dataBinding.ivFavorite.setOnClickListener {
+            if (dataBinding.favorite == null) {
+                viewModel.addFavorite(Favorite(0, word = args.word))
+            } else {
+                viewModel.deleteFavoriteByWord(args.word)
+            }
         }
 
         observeSearch()
@@ -105,6 +115,11 @@ class SearchDetailFragment : Fragment(), Injectable {
                 showError(it.message?.message)
                 startSearch()
             }
+        })
+
+        viewModel.getFavoriteByWord(args.word).observe(viewLifecycleOwner, Observer {
+            dataBinding.favorite = it
+            dataBinding.executePendingBindings()
         })
     }
 }

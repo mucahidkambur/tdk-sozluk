@@ -11,18 +11,20 @@
         android:label="nav_home"
         tools:layout="@layout/fragment_main">
 
-        <action android:id="@+id/actionSearchDetail"
-            app:destination="@id/nav_search_detail"/>
+        <action
+            android:id="@+id/actionSearchDetail"
+            app:destination="@id/nav_search_detail" />
     </fragment>
 
     <fragment
         android:id="@+id/nav_search"
         android:name="com.mucahitkambur.tdksozluk.ui.search.SearchFragment"
         android:label="nav_search"
-        tools:layout="@layout/fragment_search" >
+        tools:layout="@layout/fragment_search">
 
-        <action android:id="@+id/actionSearchDetail"
-            app:destination="@id/nav_search_detail"/>
+        <action
+            android:id="@+id/actionSearchDetail"
+            app:destination="@id/nav_search_detail" />
 
     </fragment>
 
@@ -30,23 +32,26 @@
         android:id="@+id/nav_search_detail"
         android:name="com.mucahitkambur.tdksozluk.ui.search.SearchDetailFragment"
         android:label="nav_search_detail"
-        tools:layout="@layout/fragment_search_detail" >
+        tools:layout="@layout/fragment_search_detail">
 
-        <argument android:name="word"
-            app:argType="string"/>
+        <argument
+            android:name="word"
+            app:argType="string" />
 
         <action
             android:id="@+id/action_nav_search_detail_to_nav_search"
             app:destination="@id/nav_search"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"/>
+            app:exitAnim="@anim/slide_out_left" />
 
     </fragment>
-
     <fragment
-        android:id="@+id/nav_about"
-        android:name="com.mucahitkambur.tdksozluk.ui.about.AboutFragment"
-        android:label="nav_about"
-        tools:layout="@layout/fragment_about" />
+        android:id="@+id/nav_favorites"
+        android:name="com.mucahitkambur.tdksozluk.ui.favorites.FavoritesFragment"
+        android:label="FavoritesFragment">
+        <action
+            android:id="@+id/action_nav_favorites_to_nav_search_detail"
+            app:destination="@id/nav_search_detail" />
+    </fragment>
 
 </navigation>

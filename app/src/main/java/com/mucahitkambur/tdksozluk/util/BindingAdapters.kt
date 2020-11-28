@@ -8,6 +8,7 @@ import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.mucahitkambur.tdksozluk.BuildConfig
 import com.mucahitkambur.tdksozluk.R
+import com.mucahitkambur.tdksozluk.model.favorites.Favorite
 
 object BindingAdapters {
 
@@ -44,5 +45,16 @@ object BindingAdapters {
         Glide.with(context)
             .load(url)
             .into(this)
+    }
+
+    @JvmStatic
+    @BindingAdapter("isFavorited")
+    fun ImageView.isFavorited(favorite: Favorite?) {
+        val glide = Glide.with(context)
+        if (favorite == null) {
+            glide.load(R.drawable.ic_favorite_empty).into(this)
+        } else {
+            glide.load(R.drawable.ic_favorites).into(this)
+        }
     }
 }

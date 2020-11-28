@@ -65,14 +65,6 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         })
     }
 
-    override fun onBackPressed() {
-        if (isDestinationSearchDetail()) {
-            findNavController(R.id.fragment_container).navigate(SearchDetailFragmentDirections.actionNavSearchDetailToNavSearch())
-        } else {
-            super.onBackPressed()
-        }
-    }
-
     private fun isDestinationSearchDetail(): Boolean{
         return navController().currentDestination?.id == R.id.nav_search_detail
     }

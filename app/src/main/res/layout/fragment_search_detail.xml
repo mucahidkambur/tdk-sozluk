@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -12,14 +12,23 @@
         <variable
             name="searchContent"
             type="com.mucahitkambur.tdksozluk.model.search.SearchResult" />
+
+        <variable
+            name="viewModel"
+            type="com.mucahitkambur.tdksozluk.ui.search.SearchViewModel" />
+
+        <variable
+            name="favorite"
+            type="com.mucahitkambur.tdksozluk.model.favorites.Favorite" />
+
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.search.SearchDetailFragment"
         android:background="@color/blue"
-        android:fitsSystemWindows="true">
+        android:fitsSystemWindows="true"
+        tools:context=".ui.search.SearchDetailFragment">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -36,34 +45,54 @@
                     android:id="@+id/toolbar_common"
                     android:layout_width="match_parent"
                     android:layout_height="?actionBarSize"
-                    app:navigationIcon="@drawable/ic_back"/>
+                    app:navigationIcon="@drawable/ic_back">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/ivFavorite"
+                            isFavorited="@{favorite}"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginEnd="@dimen/margin_normal"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="@android:color/white"
+                            tools:srcCompat="@drawable/ic_favorites" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.appcompat.widget.Toolbar>
 
             </com.google.android.material.appbar.AppBarLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/search_detail_word"
-                android:gravity="center_vertical"
-                android:background="@color/blue">
+                android:background="@color/blue"
+                android:gravity="center_vertical">
 
                 <TextView
                     style="@style/TextAppearance.Header.Title"
+                    visibleInvisible="@{isVisible}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_huge"
                     android:layout_marginEnd="@dimen/margin_huge"
-                    visibleInvisible="@{isVisible}"
-                    android:text="@{searchContent.capitalize()}"/>
+                    android:text="@{searchContent.capitalize()}" />
             </RelativeLayout>
 
             <com.github.captain_miao.optroundcardview.OptRoundCardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/background"
+                app:optRoundCardBottomEdges="false"
                 app:optRoundCardCornerRadius="@dimen/margin_normal"
                 app:optRoundCardLeftBottomCorner="false"
-                app:optRoundCardRightBottomCorner="false"
-                app:optRoundCardBottomEdges="false">
+                app:optRoundCardRightBottomCorner="false">
 
                 <androidx.core.widget.NestedScrollView
                     android:layout_width="match_parent"
@@ -71,59 +100,59 @@
                     android:paddingTop="@dimen/spacing_micro">
 
                     <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    visibleInvisible="@{isVisible}">
-
-                    <TextView
-                        style="@style/TextAppearance.Title"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_medium"
-                        android:layout_marginTop="@dimen/margin_medium"
-                        android:text="@string/means"/>
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyc_search_mean"
+                        visibleInvisible="@{isVisible}"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+                        android:orientation="vertical">
 
-                    <TextView
-                        style="@style/TextAppearance.Title"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_medium"
-                        android:layout_marginTop="@dimen/margin_medium"
-                        android:layout_marginBottom="@dimen/margin_medium"
-                        android:text="@string/proverbs"
-                        visibleGone="@{searchContent.atasozu == null ? false : true}"/>
+                        <TextView
+                            style="@style/TextAppearance.Title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_medium"
+                            android:layout_marginTop="@dimen/margin_medium"
+                            android:text="@string/means" />
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyc_search_proverb"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        app:spanCount="3"
-                        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"/>
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyc_search_mean"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-                    <TextView
-                        style="@style/TextAppearance.Title"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_medium"
-                        android:layout_marginTop="@dimen/margin_medium"
-                        android:layout_marginBottom="@dimen/margin_medium"
-                        android:text="@string/finger_alphabet"/>
+                        <TextView
+                            style="@style/TextAppearance.Title"
+                            visibleGone="@{searchContent.atasozu == null ? false : true}"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_medium"
+                            android:layout_marginTop="@dimen/margin_medium"
+                            android:layout_marginBottom="@dimen/margin_medium"
+                            android:text="@string/proverbs" />
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyc_search_alphabet"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"/>
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyc_search_proverb"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+                            app:spanCount="3" />
 
-                </LinearLayout>
+                        <TextView
+                            style="@style/TextAppearance.Title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_medium"
+                            android:layout_marginTop="@dimen/margin_medium"
+                            android:layout_marginBottom="@dimen/margin_medium"
+                            android:text="@string/finger_alphabet" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyc_search_alphabet"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager" />
+
+                    </LinearLayout>
 
                 </androidx.core.widget.NestedScrollView>
             </com.github.captain_miao.optroundcardview.OptRoundCardView>
@@ -131,10 +160,10 @@
         </LinearLayout>
 
         <ProgressBar
+            visibleGone="@{!isVisible}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|center_vertical"
-            visibleGone="@{!isVisible}"/>
+            android:layout_gravity="center_horizontal|center_vertical" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

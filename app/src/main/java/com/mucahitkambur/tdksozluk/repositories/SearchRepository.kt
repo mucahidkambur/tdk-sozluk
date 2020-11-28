@@ -2,6 +2,7 @@ package com.mucahitkambur.tdksozluk.repositories
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
+import com.mucahitkambur.tdksozluk.model.favorites.Favorite
 import com.mucahitkambur.tdksozluk.model.search.History
 import com.mucahitkambur.tdksozluk.model.search.SearchResult
 import com.mucahitkambur.tdksozluk.model.search.Suggestion
@@ -71,6 +72,22 @@ class SearchRepository @Inject constructor(
     fun deleteSearchHistory(){
         appExecutors.diskIO().execute{
             database.historyDao().deleteAll()
+        }
+    }
+
+    fun addFavoriteToFavoritesDb(favorite: Favorite) {
+        appExecutors.diskIO().execute{
+            database.favoriteDao().insert(favorite)
+        }
+    }
+
+    fun getFavoriteFromFavoritesDb(word: String) : LiveData<Favorite> {
+        return database.favoriteDao().getFavoriteByWord(word)
+    }
+
+    fun deleteFavoriteByWord(word: String) {
+        appExecutors.diskIO().execute{
+            database.favoriteDao().deleteFavoriteByWord(word)
         }
     }
 }
