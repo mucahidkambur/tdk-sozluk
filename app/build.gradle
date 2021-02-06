@@ -106,18 +106,17 @@ static def getProperty(@Nullable Properties properties, String name){
 }
 
 dependencies {
-    def nav_version = "2.3.1"
+    def nav_version = "2.3.3"
     def dagger_version = "2.16"
-    def retrofit_version = "2.6.0"
-    def room_version = "2.2.5"
+    def retrofit_version = "2.9.0"
+    def room_version = "2.2.6"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.core:core-ktx:1.3.2'
-    implementation 'androidx.core:core:1.3.2'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    implementation 'com.google.android.material:material:1.2.1'
+    implementation 'com.google.android.material:material:1.3.0'
 
     //Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
@@ -135,7 +134,7 @@ dependencies {
     //Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.12.6'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
 
     //Room
     implementation "androidx.room:room-runtime:$room_version"
@@ -148,9 +147,9 @@ dependencies {
     kapt "com.android.databinding:compiler:3.1.4"
 
     //Firebase
-    implementation 'com.google.firebase:firebase-analytics:18.0.0'
-    implementation 'com.google.firebase:firebase-core:18.0.0'
-    implementation 'com.google.android.gms:play-services-ads:19.5.0'
+    implementation 'com.google.firebase:firebase-analytics:18.0.2'
+    implementation 'com.google.firebase:firebase-core:18.0.2'
+    implementation 'com.google.android.gms:play-services-ads:19.7.0'
 
     //3th Party
     implementation 'com.github.Ferfalk:SimpleSearchView:0.1.6'
