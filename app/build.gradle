@@ -12,7 +12,7 @@ apply plugin: 'androidx.navigation.safeargs'
 
 apply plugin: 'com.google.gms.google-services'
 
-apply plugin: 'io.fabric'
+apply plugin: 'com.google.firebase.crashlytics'
 
 android {
     compileSdkVersion 29

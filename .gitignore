@@ -15,5 +15,5 @@
 keystore.properties
 google-services.json
 /app/crashlytics.properties
-/key
+/keys
 /app/production
