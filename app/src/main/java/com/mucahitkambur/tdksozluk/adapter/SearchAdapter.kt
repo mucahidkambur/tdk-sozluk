@@ -10,7 +10,7 @@ class SearchAdapter : RecyclerView.Adapter<SearchViewHolder>() {
 
     var suggestionClick: ((Suggestion) -> Unit)? = null
 
-    private var suggestionsFiltered: List<Suggestion> = arrayListOf()
+    var suggestionsFiltered: List<Suggestion> = arrayListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
         val inflater = LayoutInflater.from(parent.context)

@@ -63,7 +63,7 @@ class SearchDetailFragment : Fragment(), Injectable {
         addCounter()
 
         dataBinding.toolbarCommon.setOnClickListener{
-            findNavController().navigate(SearchDetailFragmentDirections.actionNavSearchDetailToNavSearch())
+            findNavController().navigateUp()
         }
 
         dataBinding.ivFavorite.setOnClickListener {

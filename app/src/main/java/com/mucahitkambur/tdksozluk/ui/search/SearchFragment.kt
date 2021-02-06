@@ -34,12 +34,13 @@ class SearchFragment : Fragment(), Injectable {
     lateinit var database: AppDatabase
 
     private lateinit var searchAdapter: SearchAdapter
+    private lateinit var historyAdapter: HistoryAdapter
 
     private lateinit var viewModel: SearchViewModel
 
     private lateinit var dataBinding: FragmentSearchBinding
 
-    private var searchSuggestion: List<Suggestion>? = null
+    private var searchText: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,15 +59,14 @@ class SearchFragment : Fragment(), Injectable {
         return dataBinding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         initView()
         observeHistory()
         observeSuggestions()
     }
 
-    private fun initView(){
+    private fun initView() {
         dataBinding.viewSearch.searchEditText.showKeyboard()
         dataBinding.viewSearch.visibility = View.VISIBLE
 
@@ -82,18 +82,22 @@ class SearchFragment : Fragment(), Injectable {
             dataBinding.viewSearch.searchEditText.text.append(resources.getString(R.string.capped_u))
         }
 
+        historyAdapter = HistoryAdapter()
         searchAdapter = SearchAdapter()
         searchAdapter.suggestionClick = {
             hideKeyboard()
             startSearchDetail(it.madde)
         }
+        dataBinding.recycHistory.adapter = historyAdapter
         dataBinding.recycSuggestion.adapter = searchAdapter
         dataBinding.recycSuggestion.addItemDecoration(divider())
         dataBinding.recycHistory.addItemDecoration(divider())
 
-        dataBinding.viewSearch.setOnQueryTextListener(object: SimpleSearchView.OnQueryTextListener{
+        dataBinding.viewSearch.setOnQueryTextListener(object :
+            SimpleSearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 query?.let {
+                    searchText = null
                     hideKeyboard()
                     startSearchDetail(it)
                 }
@@ -101,9 +105,14 @@ class SearchFragment : Fragment(), Injectable {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
+                searchText = newText
                 viewModel.suggestionWord(newText)
-                dataBinding.recycSuggestion.visibility = View.VISIBLE
-                dataBinding.linearHistory.visibility = View.GONE
+                if (newText.isNullOrEmpty()) {
+                    dataBinding.linearHistory.visibility = View.VISIBLE
+                } else {
+                    dataBinding.recycSuggestion.visibility = View.VISIBLE
+                    dataBinding.linearHistory.visibility = View.GONE
+                }
                 return false
             }
 
@@ -113,26 +122,26 @@ class SearchFragment : Fragment(), Injectable {
         })
     }
 
-    private fun observeHistory(){
-        viewModel.historyDbResult().observe(this, Observer {
-            if (!it.isNullOrEmpty()){
-                dataBinding.linearHistory.visibility = View.VISIBLE
-            }else
-                dataBinding.linearHistory.visibility = View.GONE
-
-            val historyAdapter = HistoryAdapter(it)
+    private fun observeHistory() {
+        viewModel.historyDbResult().observe(viewLifecycleOwner, Observer {
             historyAdapter.historyClick = {
                 startSearchDetail(it.word)
             }
             historyAdapter.deleteClick = {
                 viewModel.deleteHistoryById(it.id)
             }
-            dataBinding.recycHistory.adapter = historyAdapter
+            historyAdapter.items = it
         })
     }
 
-    private fun observeSuggestions(){
-        viewModel.suggestionsDbResult.observe(this, Observer {
+    private fun observeSuggestions() {
+        viewModel.suggestionsDbResult.observe(viewLifecycleOwner, Observer {
+            if (searchText.isNullOrEmpty()) {
+                dataBinding.recycSuggestion.visibility = View.GONE
+            } else {
+                dataBinding.recycSuggestion.visibility = View.VISIBLE
+            }
+
             searchAdapter.setSuggestions(it)
         })
     }

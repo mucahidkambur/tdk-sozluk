@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-            <variable
-                name="viewModel"
-                type="com.mucahitkambur.tdksozluk.ui.search.SearchViewModel" />
+
+        <variable
+            name="viewModel"
+            type="com.mucahitkambur.tdksozluk.ui.search.SearchViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.22"/>
+            app:layout_constraintGuide_percent="0.22" />
 
         <com.ferfalk.simplesearchview.SimpleSearchView
             android:id="@+id/view_search"
@@ -28,11 +29,11 @@
             android:layout_marginStart="@dimen/margin_normal"
             android:layout_marginTop="@dimen/margin_normal"
             android:layout_marginEnd="@dimen/margin_normal"
+            android:background="@color/blue"
             app:layout_constraintBottom_toTopOf="@+id/card_capped"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:background="@color/blue"
             app:searchBackIcon="@drawable/ic_search"
             app:type="card"
             app:voiceSearch="true" />
@@ -42,9 +43,9 @@
             android:layout_width="0dp"
             android:layout_height="42dp"
             android:layout_marginStart="@dimen/margin_normal"
+            android:layout_marginBottom="@dimen/spacing_normal"
             android:orientation="horizontal"
             android:paddingStart="@dimen/spacing_micro"
-            android:layout_marginBottom="@dimen/spacing_normal"
             app:layout_constraintBottom_toTopOf="@+id/layout_guidline"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -107,14 +108,14 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="@color/background"
-            app:layout_constraintTop_toBottomOf="@+id/layout_guidline"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_guidline"
+            app:optRoundCardBottomEdges="false"
             app:optRoundCardCornerRadius="@dimen/margin_normal"
             app:optRoundCardLeftBottomCorner="false"
-            app:optRoundCardRightBottomCorner="false"
-            app:optRoundCardBottomEdges="false">
+            app:optRoundCardRightBottomCorner="false">
 
             <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
@@ -128,23 +129,22 @@
                         android:id="@+id/linear_history"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:visibility="gone">
+                        android:orientation="vertical">
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recyc_history"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
                         <TextView
                             android:id="@+id/text_delete_history"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:padding="@dimen/margin_normal"
                             android:layout_gravity="center_horizontal"
-                            android:text="@string/delete_history"
-                            android:onClick="@{() -> viewModel.deleteHistory()}"/>
+                            android:onClick="@{() -> viewModel.deleteHistory()}"
+                            android:padding="@dimen/margin_normal"
+                            android:text="@string/delete_history" />
                     </LinearLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
@@ -152,7 +152,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:visibility="gone"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
                 </RelativeLayout>
 
