@@ -25,6 +25,7 @@ fun Fragment.startSearch(){
 }
 
 fun Fragment.startSearchDetail(word: String){
+    hideKeyboard()
     findNavController().navigate(
         SearchFragmentDirections.actionSearchDetail(
             word
