@@ -15,13 +15,13 @@ apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
     defaultConfig {
         applicationId "com.mucahitkambur.tdksozluk"
         minSdkVersion 21
-        targetSdkVersion 29
-        versionCode 3
-        versionName "1.0.2"
+        targetSdkVersion 30
+        versionCode 4
+        versionName "1.0.7"
     }
     dataBinding {
         enabled true
