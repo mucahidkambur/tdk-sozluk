@@ -52,8 +52,8 @@ fun alphabetPerCharacter(word: String): List<String> {
     for (character in word){
         when(character.toString()){
             "â" -> characterList.add("a")
-            "î" -> characterList.add("î")
-            "û" -> characterList.add("û")
+            "î" -> characterList.add("i")
+            "û" -> characterList.add("ü")
             else -> characterList.add(character.toString())
         }
     }
