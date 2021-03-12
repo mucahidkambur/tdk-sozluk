@@ -87,7 +87,7 @@ Açık kaynağın en güzel yanlarından biri isteyen herkesin projeye destek sa
 
 ### Lisans
 
-> Copyright (C) 2019 Mücahit KAMBUR
+> Copyright (C) 2021 Mücahid KAMBUR
 
 Bu program özgür yazılımdır: Özgür Yazılım Vakfı tarafından yayımlanan GNU
 Genel Kamu Lisansı’nın sürüm 3 ya da (isteğinize bağlı olarak) daha sonraki
@@ -103,13 +103,13 @@ adresine bakınız.
 
 ### İletişim
 
-Mail - mucahit-kambur@hotmail.com
+Mail - mucahidkambur@gmail.com
 
-Portfolio: [https://mucahitkambur.github.io](https://mucahitkambur.github.io)
+Portfolio: [https://mucahidkambur.github.io/](https://mucahidkambur.github.io)
 
-Twitter: [@mucahitkambur](https://twitter.com/mucahitkambur)
+Twitter: [@mucahidkambur](https://twitter.com/mucahidkambur)
 
-LinkedIn: [mucahitkambur](https://www.linkedin.com/in/mucahitkambur/)
+LinkedIn: [mucahidkambur](https://www.linkedin.com/in/mucahidkambur/)
 
 Blog: [mucahitkambur.wordpress.com](https://mucahitkambur.wordpress.com)
 
