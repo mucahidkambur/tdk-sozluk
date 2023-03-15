@@ -149,7 +149,6 @@ dependencies {
     //Firebase
     implementation 'com.google.firebase:firebase-analytics:18.0.2'
     implementation 'com.google.firebase:firebase-core:18.0.2'
-    implementation 'com.google.android.gms:play-services-ads:19.7.0'
 
     //3th Party
     implementation 'com.github.Ferfalk:SimpleSearchView:0.1.6'
