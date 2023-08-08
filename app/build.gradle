@@ -20,8 +20,8 @@ android {
         applicationId "com.mucahitkambur.tdksozluk"
         minSdkVersion 21
         targetSdkVersion 33
-        versionCode 6
-        versionName "1.0.10"
+        versionCode 7
+        versionName "1.0.11"
     }
     dataBinding {
         enabled true
