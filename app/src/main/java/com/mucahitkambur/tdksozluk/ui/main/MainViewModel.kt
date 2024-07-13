@@ -2,8 +2,8 @@ package com.mucahitkambur.tdksozluk.ui.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.switchMap
 import com.mucahitkambur.tdksozluk.model.search.Suggestion
 import com.mucahitkambur.tdksozluk.model.main.ContentResult
 import com.mucahitkambur.tdksozluk.model.main.Kural
@@ -22,8 +22,8 @@ class MainViewModel @Inject constructor(
     private val _webViewClick = MutableLiveData<Url>()
     private val _textClick = MutableLiveData<String>()
 
-    val mainContentResult: LiveData<Event<Resource<ContentResult>>> = Transformations
-        .switchMap(_mainContent){ repository.mainContent() }
+    val mainContentResult: LiveData<Event<Resource<ContentResult>>> = _mainContent
+        .switchMap { repository.mainContent() }
 
     fun mainContent(){
         _mainContent.value = Event(Unit)

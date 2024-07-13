@@ -12,7 +12,6 @@ import com.mucahitkambur.tdksozluk.R
 import com.mucahitkambur.tdksozluk.databinding.ActivityWebViewBinding
 import com.mucahitkambur.tdksozluk.model.main.Url
 import com.mucahitkambur.tdksozluk.util.EXTRA_URL
-import kotlinx.android.synthetic.main.activity_web_view.*
 
 class WebViewActivity : AppCompatActivity() {
 

@@ -33,6 +33,7 @@ class MainRepository @Inject constructor(
                 is ApiErrorResponse -> {
                     contentResult.postValue(Event(Resource.error(apiResponse.errorMessage, null)))
                 }
+                else -> Unit
             }
         }
         return contentResult
@@ -49,6 +50,7 @@ class MainRepository @Inject constructor(
                 is ApiErrorResponse -> {
                     suggestionsContent.postValue(Event(Resource.error(apiResponse.errorMessage, null)))
                 }
+                else -> Unit
             }
         }
         return suggestionsContent

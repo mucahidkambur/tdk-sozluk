@@ -34,6 +34,7 @@ class SearchRepository @Inject constructor(
                     is ApiErrorResponse -> {
                         searchContentResult.postValue(Event(Resource.error(apiResponse.errorMessage, null)))
                     }
+                    else -> Unit
                 }
             }catch (exception: Exception) {
                 val apiException = ApiException.create(exception)

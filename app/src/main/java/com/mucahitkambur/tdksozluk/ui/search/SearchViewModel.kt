@@ -2,8 +2,8 @@ package com.mucahitkambur.tdksozluk.ui.search
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.switchMap
 import com.mucahitkambur.tdksozluk.model.favorites.Favorite
 import com.mucahitkambur.tdksozluk.model.search.History
 import com.mucahitkambur.tdksozluk.model.search.SearchResult
@@ -20,15 +20,15 @@ class SearchViewModel @Inject constructor(
     private val _searchWord = MutableLiveData<Event<String>>()
     private val _suggestionWord = MutableLiveData<String>()
 
-    val searchResult: LiveData<Event<Resource<List<SearchResult>>>> = Transformations
-        .switchMap(_searchWord) {repository.searchContent(it.peekContent())}
+    val searchResult: LiveData<Event<Resource<List<SearchResult>>>> = _searchWord
+        .switchMap() {repository.searchContent(it.peekContent())}
 
     fun searchWord(word: String){
         _searchWord.value = Event(word)
     }
 
-    val suggestionsDbResult: LiveData<List<Suggestion>> = Transformations
-        .switchMap(_suggestionWord) {repository.getSuggestionFromDb(it)}
+    val suggestionsDbResult: LiveData<List<Suggestion>> = _suggestionWord
+        .switchMap {repository.getSuggestionFromDb(it)}
 
     fun suggestionWord(word: String?){
         _suggestionWord.value = word

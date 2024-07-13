@@ -14,9 +14,7 @@ import com.mucahitkambur.tdksozluk.R
 import com.mucahitkambur.tdksozluk.adapter.PageAdapter
 import com.mucahitkambur.tdksozluk.databinding.FragmentMainBinding
 import com.mucahitkambur.tdksozluk.di.Injectable
-import com.mucahitkambur.tdksozluk.network.local.AppDatabase
 import com.mucahitkambur.tdksozluk.util.*
-import kotlinx.android.synthetic.main.fragment_main.*
 import javax.inject.Inject
 
 class MainFragment : Fragment(), Injectable {

@@ -43,7 +43,7 @@ fun hasNetwork(context: Context): Boolean? {
 }
 
 fun Fragment.showError(message: String?) {
-    Alerter.create(activity)
+    Alerter.create(requireActivity())
         .setTitle(message ?: "")
         .setBackgroundColorRes(R.color.red)
         .show()
