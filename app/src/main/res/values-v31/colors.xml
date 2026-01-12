@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="nav_selected">@android:color/system_accent1_600</color>
+    <color name="nav_unselected">@android:color/system_neutral1_500</color>
+
+    <color name="blue">@android:color/system_accent1_600</color>
+</resources>
